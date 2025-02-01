@@ -1,0 +1,406 @@
+/* Écran ordi */
+@media only screen and (min-width:1000px) {
+    #experience-telephone {
+        display: none;
+    }
+    #titre-section-legende {
+        font-size : 22px;
+        border-bottom: 2px solid #000000;
+        border-bottom: 2px solid #000000;
+        padding-left: 0.5vw;
+        padding-bottom: 0.5vw;
+    }
+    .légende-données {
+        font-size: 17px;
+        text-indent: 0.5vw;
+    }
+    .légende-logo {
+        width: 20%;
+        height: 20%;
+    }
+    #titre-gauche {
+        background: #e8e9d1;
+        display: block;
+        padding: 50px;
+        margin: 0px;
+        border-top: solid 5px;
+        border-bottom: solid 5px;	
+        font-size: 50px;
+    }
+    #titre-droite {
+        background: #ffffff;
+        display: block;
+        padding: 50px;
+        margin: 0px;
+        border-top: solid 5px;
+        border-bottom: solid 5px;	
+        font-size: 50px;
+    }
+    #citation {
+        background: #ffffffe7;
+        display: block;
+        font-family: "Lato","sans-serif";
+        padding-top: 50px;
+        padding-bottom: 50px;
+        padding-left: 15vw;
+        padding-right: 15vw;
+        border-top: solid 5px;
+        margin: 0px;
+        font-size: 20px;
+    }
+    #boite-image-gauche {
+        margin-top: 0.5em;
+        margin-right: 1em;
+        margin-left: 1em;
+        float: right;
+        width: 50%;
+    }
+    #boite-image-droite {
+        margin-top: 0.5em;
+        margin-right: 1em;
+        margin-left: 1em;
+        float: left;
+        width: 50%;
+    }
+    .gauche-image {
+        width: 75%;
+        height: 75%;
+        border: solid 5px;
+        transition: height 0.3s, width 0.3s;
+    }
+    .droite-image {
+        width: 75%;
+        height: 75%;
+        border: solid 5px;
+        transition: height 0.3s, width 0.3s;
+    }
+/* CARTE */
+    #cadre-map {
+        max-width: 85vw;
+        margin: auto;
+        margin-top: 50px;
+        margin-bottom: 50px;
+        background: #e8e9d1;
+    }
+    #carte-et-legende {
+        display: flex;
+        flex-direction: row;	
+    }
+    #legende-et-titre {
+        display: block;
+        max-width : 15vw;
+    }
+    #map {
+        border: 5px solid #000000;
+        height: auto;
+    }
+    .mapLegend {
+        max-width: auto;
+        height: 60vh;
+        border-left: 5px solid;
+        border-bottom: 5px solid;
+        overflow-y: scroll;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+    .mapLegend-title {
+        border-bottom : 5px solid;
+        border-left : 5px solid;
+        border-top : 5px solid;
+        font: 2vw bold;
+        padding: 1vw;	
+    }
+    .mapLegend-scroll {
+        padding-left : 1vw;
+    }
+    #titre-section-legende {
+        font-size : 22px;
+        border-bottom: 2px solid #000000;
+        border-bottom: 2px solid #000000;
+        padding-left: 0.5vw;
+        padding-bottom: 0.5vw;
+        text-indent: 0px;
+    }
+    .mapCanvas { 
+        width: 100%;
+    }
+    #titre-carte {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        padding-bottom: 1px;
+        background: #e8e9d1;
+        border-top: solid 5px;
+        border-left: solid 5px;
+        border-right: solid 5px;
+    }
+    .gros-titre-carte {
+        font-size: 46px;
+        margin-top: 10px;
+        margin-bottom: 5px;
+        text-indent: 0px;;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+    .sous-titre-carte {
+        font-size: 22px;
+        margin-top: 5px;
+        margin-bottom: 10px;
+        padding-left: 15%;
+        padding-right: 15%;
+        text-indent: 0px;;
+        font-family: "Lato", "sans-serif";
+    }
+    #titre-tableau {
+        font-size : 18px;
+        border-bottom: 2px solid #000000;
+        padding-bottom: 5px;
+    }
+    #sous-titre-tableau {
+        font-size : 16px;
+        border-bottom: 1px solid #000000;
+        padding-bottom: 3px;		
+    }
+    #titre-tableau {
+        font-size : 18px;
+        border-bottom: 2px solid #000000;
+        padding-bottom: 5px;
+    }
+    #sous-titre-tableau {
+        font-size : 16px;
+        border-bottom: 1px solid #000000;
+        padding-bottom: 3px;		
+    }
+    .tableau-données {
+        border-bottom: 1px solid #ddd;
+        padding-bottom: 2px;
+        min-width : 175px;
+    }
+}
+
+/* Écran réduit */
+@media only screen and (max-width:1500px) {
+    #description {
+        flex-wrap: nowrap;
+        border-left: solid 10vw #cacbb8;
+        border-right: solid 10vw #cacbb8;
+        line-height: 1.3;				
+    }
+}	
+
+/* Écran téléphone */
+@media only screen and (max-width:1000px) {
+    #description {
+        flex-wrap: nowrap;
+        border-left: solid 0vw #cacbb8;
+        border-right: solid 0vw #cacbb8;
+        line-height: 1.3;	
+    }
+    p {
+        font-size: 17px;
+    }
+    #titre-section-legende {
+        font-size : 16px;
+        border-bottom: 2px solid #000000;
+        border-bottom: 2px solid #000000;
+        padding-left: 0.5vw;
+        padding-bottom: 0.5vw;
+        text-indent: 0px;
+    }
+    .légende-données {
+        font-size: 14px;
+        text-indent: 1vw;
+    }
+    .légende-logo {
+        width: 20px;
+        height: 20px;
+    }
+    #titre-droite {
+        background: #ffffff;
+        display: block;
+        padding: 30px;
+        margin: 0px;
+        border-top: solid 5px;
+        border-bottom: solid 5px;	
+        font-size: 30px;
+    }
+    #citation {
+        background: #ffffff;
+        display: block;
+        font-family: "Lato","sans-serif";
+        padding-top: 30px;
+        padding-bottom: 30px;
+        padding-left: 30px;
+        padding-right: 30px;
+        margin: 0px;
+        font-size: 18px;
+    }
+    #titre-gauche {
+        background: #e8e9d1;
+        display: block;
+        padding: 30px;
+        margin: 0px;
+        border-top: solid 5px;
+        border-bottom: solid 5px;	
+        font-size: 30px;		
+    }
+    #carte-et-legende {
+        display: flex;
+        flex-direction: column;		
+    }
+    .visage {
+        width: 5%;
+        height: 5%;
+    }
+    .Maxencejeanjean {
+        width: 20%;
+        height: 20%;
+    }
+    .MJlogo {
+        width: 6%;
+        height: 6%;
+        border-left: solid #292624 7px;
+    }
+    #boite-image-gauche {
+        margin-top: 0.5em;
+        margin-right: 1em;
+        margin-left: 1em;
+    }
+    #boite-image-droite {
+        margin-top: 0.5em;
+        margin-right: 1em;
+        margin-left: 1em;
+    }
+    .gauche-image {
+        width: 75%;
+        height: 75%;
+        border: solid 5px;
+        transition: height 0.3s, width 0.3s;
+    }
+    .droite-image {
+        width: 75%;
+        height: 75%;
+        border: solid 5px;
+        transition: height 0.3s, width 0.3s;
+    }
+/* CARTE */
+    #cadre-map {
+        max-width: 85vw;
+        margin: auto;
+        margin-top: 30px;
+        margin-bottom: 50px;
+        background: #e8e9d1;
+    }
+    #carte-et-legende {
+        display: flex;
+        flex-direction: row;		
+    }
+    #legende-et-titre {
+        display: block;
+        max-width : 25vw;
+    }
+    #map {
+        border: 5px solid #000000;
+        height: auto;
+    }
+    .mapLegend {
+        max-width: auto;
+        height: 60vh;
+        border-left: 5px solid;
+        border-bottom: 5px solid;
+        overflow-y: scroll;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+    .mapLegend-title {
+        border-bottom : 5px solid;
+        border-left : 5px solid;
+        border-top : 5px solid;
+        font: 16px bold;
+        padding: 1vw;	
+    }
+    .mapLegend-scroll {
+        padding-left : 1vw;
+    }
+    .mapCanvas { 
+        width: 74vw;
+    }
+    #titre-carte {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        padding-bottom: 1px;
+        background: #e8e9d1;
+        border-top: solid 5px;
+        border-left: solid 5px;
+        border-right: solid 5px;
+    }
+    .gros-titre-carte {
+        font: 26px bold;
+        margin-top: 10px;
+        margin-bottom: 5px;
+        margin-left: 25px;
+        margin-right: 25px;
+        text-indent: 0px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+    .sous-titre-carte {
+        font: 15px bold;
+        margin-top: 5px;
+        margin-bottom: 10px;
+        margin-left: 15px;
+        margin-right: 15px;
+        text-indent: 0px;;
+    }
+    #titre-tableau {
+        font-size : 14px;
+        border-bottom: 2px solid #000000;
+        padding-bottom: 5px;
+    }
+    #sous-titre-tableau {
+        font-size : 12px;
+        border-bottom: 1px solid #000000;
+        padding-bottom: 3px;		
+    }
+    .tableau-données {
+        border-bottom: 1px solid #ddd;
+        padding-bottom: 2px;
+        min-width : 75px;
+        max-width: 80px;
+    }
+}
+/* Téléphone droit*/	
+@media only screen and (max-width:500px) {
+#experience-telephone {
+    display: flex;
+    border-left: solid #000000 5px;
+    border-right: solid #000000 5px;
+    border-top: solid #000000 5px;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1%;
+}
+}
+/* Téléphone tourné*/
+@media only screen and (min-width:500px) {
+#experience-telephone {
+    display: none;
+}
+#boite-image-gauche {
+    margin-top: 0.5em;
+    margin-right: 1em;
+    margin-left: 1em;
+    float: right;
+    width: 50%;
+}
+#boite-image-droite {
+    margin-top: 0.5em;
+    margin-right: 1em;
+    margin-left: 1em;
+    float: left;
+    width: 50%;
+}
+}

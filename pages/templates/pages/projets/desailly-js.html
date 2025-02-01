@@ -1,0 +1,414 @@
+<script>
+    var desailly = L.tileLayer('/static/pages/desailly/CARTE-PRINCIPALE/{z}/{x}/{y}.png', {
+        minZoom: 13,
+        maxZoom: 18,
+        tms: false,
+        attribution: '<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a> &middot; © Maxence Jeanjean | Me contacter pour toute réutilisation commerciale'
+    });
+    var osm = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        minZoom: 13,
+        maxZoom: 18,
+        attribution: '<a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot © OpenStreetMap'
+    });
+    var source = L.tileLayer('./CARTE SOURCE/{z}/{x}/{y}.png', {
+        minZoom: 13,
+        maxZoom: 18,
+        attribution: 'Archives départementales du Pas-de-Calais &middot Musée des beaux-arts d\'Arras'
+    });
+    var paroisses = L.tileLayer('./CARTE PAROISSES/{z}/{x}/{y}.png', {
+        minZoom: 13,
+        maxZoom: 18,
+        attribution: '<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a> &middot; © Maxence Jeanjean | Me contacter pour toute réutilisation commerciale'
+    });
+    var googleSat = L.tileLayer('http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}',{
+        minZoom: 13,
+        maxZoom: 18,
+        subdomains:['mt0','mt1','mt2','mt3'],
+        attribution: '<a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot Google earth'
+    });
+    var cadastre = L.tileLayer('http://tms.cadastre.openstreetmap.fr/*/tout/{z}/{x}/{y}.png',{
+        minZoom: 13,
+        maxZoom: 18,
+    });
+    var map = L.map('map', {
+        attributionControl: false
+    })
+    .fitBounds([[50.22677542203423,2.6494356551582894],[50.35764294181786,2.9017316059375604]]);
+    L.control.attribution( { prefix: false } ).addTo( map );
+    var baseLayers = {
+        "(1701-1717) Cartes sources<br/>": source,		
+        "<img src=\"images/Logo/openstreetmap.svg\" width=\"20px\" height=\"20px\"> (2023) Openstreetmap": osm,
+        "<img src=\"pages/images/logo/MJ-logo.png\" width=\"20px\" height=\"20px\"> (2023) Cadastre numérisé<p class=\"layer-control-titre\">Cartes actuelles :</p>": desailly,			
+        "<img src=\"images/Logo/cadastre.png\" width=\"20px\" height=\"20px\"> (2023) Cadastre actuel": cadastre,	
+        "<img src=\"images/Logo/Google-earth.webp\" width=\"20px\" height=\"20px\"> (2023) Satellite": googleSat,
+    }
+    var overlays = {
+        "Anciennes paroisses": paroisses,
+    }
+    L.control.layers(baseLayers, overlays).addTo(map);
+    desailly.addTo(map);
+
+    var m2px = 1;
+    function newM2px() {
+        var centerLatLng = map.getCenter();
+        var pointC = map.latLngToContainerPoint(centerLatLng);
+        var pointX = [pointC.x + 100, pointC.y];
+        var latLngC = map.containerPointToLatLng(pointC);
+        var latLngX = map.containerPointToLatLng(pointX);
+
+        var distanceX = latLngC.distanceTo(latLngX)/100;
+
+        reciprocal = 1 / distanceX;
+        m2px = reciprocal;
+    }
+    function geoStyle(m) {
+        return Math.ceil(m * m2px);
+    }
+    var crs = new L.Proj.CRS('EPSG:2154', '+proj=lcc +lat_0=46.5 +lon_0=3 +lat_1=49 +lat_2=44 +x_0=700000 +y_0=6600000 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs', {
+        resolutions: [2800, 1400, 700, 350, 175, 84, 42, 21, 11.2, 5.6, 2.8, 1.4, 0.7, 0.35, 0.14, 0.07],
+    });
+
+    var hash = new L.Hash(map);
+    map.attributionControl.setPrefix('');
+    var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
+        var measureControl = new L.Control.Measure({
+            position: 'topleft',
+            primaryLengthUnit: 'meters',
+            secondaryLengthUnit: 'kilometers',
+            primaryAreaUnit: 'sqmeters',
+            secondaryAreaUnit: 'hectares'
+        });
+        measureControl.addTo(map);
+        document.getElementsByClassName('leaflet-control-measure-toggle')[0]
+        .innerHTML = '';
+        document.getElementsByClassName('leaflet-control-measure-toggle')[0]
+        .className += ' fas fa-ruler';
+    var bounds_group = new L.featureGroup([]);
+    function setBounds() {
+        map.setMaxBounds(map.getBounds());
+    }
+    function pop_cadastreexport_0(feature, layer) {
+        var popupContent = '<table align="center">\
+                <tr>\
+                    <td id="titre-tableau" colspan="2" align="center"><b>Cadastre</b></th>\
+                </tr>\
+                <tr>\
+                    <td id="sous-titre-tableau" colspan="2" align="center"><i>Parcelle</i></th>\
+                </tr>\
+                <tr>\
+                    <th class="tableau-données" scope="row">N° de parcelle :</th>\
+                    <td class="tableau-données">' + (feature.properties['id'] !== null ? autolinker.link(feature.properties['id'].toLocaleString()) : '<i>Non Renseigné</i>') + '</td>\
+                </tr>\
+                <tr>\
+                    <th class="tableau-données" scope="row" >Canton :</th>\
+                    <td class="tableau-données">' + (feature.properties['Canton'] !== null ? autolinker.link(feature.properties['Canton'].toLocaleString()) : '<i>Non Renseigné</i>') + '</td>\
+                </tr>\
+                <tr>\
+                    <th class="tableau-données" scope="row">Source :</th>\
+                    <td class="tableau-données">' + (feature.properties['source'] !== null ? autolinker.link(feature.properties['source'].toLocaleString()) : '<i>Non Renseigné</i>') + '</td>\
+                </tr>\
+                <tr>\
+                    <td id="sous-titre-tableau" colspan="2" align="center"><i>Occupation</i></th>\
+                </tr>\
+                <tr>\
+                    <th class="tableau-données" scope="row">Type :</th>\
+                    <td class="tableau-données" >' + (feature.properties['type'] !== null ? autolinker.link(feature.properties['type'].toLocaleString()) : '<i>Non Renseigné</i>') + '</td>\
+                </tr>\
+                <tr>\
+                    <th class="tableau-données" scope="row">Propriétaire :</th>\
+                    <td class="tableau-données">' + (feature.properties['proprietr'] !== null ? autolinker.link(feature.properties['proprietr'].toLocaleString()) : '<i>Non Renseigné</i>') + '</td>\
+                </tr>\
+                <tr>\
+                    <th class="tableau-données" scope="row">Occupant :</th>\
+                    <td class="tableau-données">' + (feature.properties['occupant'] !== null ? autolinker.link(feature.properties['occupant'].toLocaleString()) : '<i>Non Renseigné</i>') + '</td>\
+                </tr>\
+                <tr>\
+                    <td id="sous-titre-tableau" colspan="2" align="center"><i>Autre</i></th>\
+                </tr>\
+                <tr>\
+                    <th class="tableau-données" scope="row">Lieu-dit :</th>\
+                    <td class="tableau-données">' + (feature.properties['lieudit'] !== null ? autolinker.link(feature.properties['lieudit'].toLocaleString()) : '<i>Non Renseigné</i>') + '</td>\
+                </tr>\
+                <tr>\
+                    <th class="tableau-données" scope="row">Dimensions :</th>\
+                    <td class="tableau-données">' + (feature.properties['dimensions'] !== null ? autolinker.link(feature.properties['dimensions'].toLocaleString()) : '<i>Non Renseigné</i>') + '</td>\
+                </tr>\
+                <tr>\
+                    <th class="tableau-données" scope="row">Notes :</th>\
+                    <td class="tableau-données">' + (feature.properties['notes'] !== null ? autolinker.link(feature.properties['notes'].toLocaleString()) : '<i>Non Renseigné</i>') + '</td>\
+                </tr>\
+            </table>';
+        layer.bindPopup(popupContent, {maxHeight: 400});
+    }
+
+    function style_cadastreexport_0_0() {
+        return {
+            pane: 'pane_cadastreexport_0',
+            opacity: 0,
+            color: 'rgba(35,35,35,1.0)',
+            dashArray: '',
+            lineCap: 'butt',
+            lineJoin: 'miter',
+            weight: 1.0, 
+            fill: true,
+            fillOpacity: 0,
+            fillColor: 'rgba(190,207,80,1.0)',
+            interactive: true,
+        }
+    }
+    map.createPane('pane_cadastreexport_0');
+    map.getPane('pane_cadastreexport_0').style.zIndex = 400;
+    map.getPane('pane_cadastreexport_0').style['mix-blend-mode'] = 'normal';
+    var layer_cadastreexport_0 = new L.geoJson(json_cadastreexport_0, {
+        attribution: '',
+        interactive: true,
+        dataVar: 'json_cadastreexport_0',
+        layerName: 'layer_cadastreexport_0',
+        pane: 'pane_cadastreexport_0',
+        onEachFeature: pop_cadastreexport_0,
+        style: style_cadastreexport_0_0,
+    });
+    bounds_group.addLayer(layer_cadastreexport_0);
+    map.addLayer(layer_cadastreexport_0);
+    function pop_lieuxexport_1(feature, layer) {
+        var popupContent = '<table align="center">\
+                <tr>\
+                    <td id="titre-tableau" colspan="2" align="center"><b>' + (feature.properties['type'] !== null ? autolinker.link(feature.properties['type'].toLocaleString()) : '<i>Non renseigné<i>') + '</b></th>\
+                </tr>\
+                <tr>\
+                    <td class="tableau-données" colspan="2" align="center"><i>' + (feature.properties['Nom'] !== null ? autolinker.link(feature.properties['Nom'].toLocaleString()) : '<i>Non renseigné<i>') + '</i></th>\
+                </tr>\
+                <tr>\
+                    <td colspan="2" align="center">' + (feature.properties['img'] !== null ? autolinker.link(feature.properties['img'].toLocaleString()) : '<i>Non renseigné<i>') + '</td>\
+                </tr>\
+                <tr>\
+                    <th class="tableau-données" scope="row">Source image :</th>\
+                    <td class="tableau-données">' + (feature.properties['source img'] !== null ? autolinker.link(feature.properties['source img'].toLocaleString()) : '<i>Non renseigné<i>') + '</td>\
+                </tr>\
+            </table>';
+        layer.bindPopup(popupContent, {maxHeight: 400});
+    }
+
+    function style_lieuxexport_1_0() {
+        return {
+            pane: 'pane_lieuxexport_1',
+            opacity: 0,
+            color: 'rgba(35,35,35,1.0)',
+            dashArray: '',
+            lineCap: 'butt',
+            lineJoin: 'miter',
+            weight: 1.0, 
+            fill: true,
+            fillOpacity: 0,
+            fillColor: 'rgba(231,113,72,1.0)',
+            interactive: true,
+        }
+    }
+    map.createPane('pane_lieuxexport_1');
+    map.getPane('pane_lieuxexport_1').style.zIndex = 401;
+    map.getPane('pane_lieuxexport_1').style['mix-blend-mode'] = 'normal';
+    var layer_lieuxexport_1 = new L.geoJson(json_lieuxexport_1, {
+        attribution: '',
+        interactive: true,
+        dataVar: 'json_lieuxexport_1',
+        layerName: 'layer_lieuxexport_1',
+        pane: 'pane_lieuxexport_1',
+        onEachFeature: pop_lieuxexport_1,
+        style: style_lieuxexport_1_0,
+    });
+    bounds_group.addLayer(layer_lieuxexport_1);
+    map.addLayer(layer_lieuxexport_1);
+    function pop_routesexport_2(feature, layer) {
+        var popupContent = '<table class="popup-tableau" align="center">\
+                <tr>\
+                    <td id="titre-tableau" colspan="2" align="center"><i>Route</i></th>\
+                </tr>\
+                <tr>\
+                    <td class="tableau-données" align="center">' + (feature.properties['nom'] !== null ? autolinker.link(feature.properties['nom'].toLocaleString()) : '<i>Non renseigné<i>') + '</td>\
+                </tr>\
+            </table>';
+        layer.bindPopup(popupContent, {maxHeight: 400});
+    }
+
+    function style_routesexport_2_0() {
+        return {
+            pane: 'pane_routesexport_2',
+            opacity: 0,
+            color: 'rgba(255,158,23,1.0)',
+            dashArray: '',
+            lineCap: 'square',
+            lineJoin: 'bevel',
+            weight: 2.0,
+            fillOpacity: 0,
+            interactive: true,
+        }
+    }
+    map.createPane('pane_routesexport_2');
+    map.getPane('pane_routesexport_2').style.zIndex = 402;
+    map.getPane('pane_routesexport_2').style['mix-blend-mode'] = 'normal';
+    var layer_routesexport_2 = new L.geoJson(json_routesexport_2, {
+        attribution: '',
+        interactive: true,
+        dataVar: 'json_routesexport_2',
+        layerName: 'layer_routesexport_2',
+        pane: 'pane_routesexport_2',
+        onEachFeature: pop_routesexport_2,
+        style: style_routesexport_2_0,
+    });
+    bounds_group.addLayer(layer_routesexport_2);
+    map.addLayer(layer_routesexport_2);
+    function pop_rivieresexport_3(feature, layer) {
+        var popupContent = '<table>\
+                <tr>\
+                    <td id="titre-tableau" colspan="2" align="center"><i>Rivière</i></th>\
+                </tr>\
+                <tr>\
+                    <th class="tableau-données" scope="row">Nom de la section :</th>\
+                    <td class="tableau-données">' + (feature.properties['nom_sec'] !== null ? autolinker.link(feature.properties['nom_sec'].toLocaleString()) : '<i>Non renseigné<i>') + '</td>\
+                </tr>\
+                <tr>\
+                    <th class="tableau-données" scope="row">Nom de la rivière :</th>\
+                    <td class="tableau-données">' + (feature.properties['nom_riv'] !== null ? autolinker.link(feature.properties['nom_riv'].toLocaleString()) : '<i>Non renseigné<i>') + '</td>\
+                </tr>\
+            </table>';
+        layer.bindPopup(popupContent, {maxHeight: 400});
+    }
+
+    function style_rivieresexport_3_0() {
+        return {
+            pane: 'pane_rivieresexport_3',
+            opacity: 0,
+            color: 'rgba(244,42,187,1.0)',
+            dashArray: '',
+            lineCap: 'square',
+            lineJoin: 'bevel',
+            weight: 3.0,
+            fillOpacity: 0,
+            interactive: true,
+        }
+    }
+    map.createPane('pane_rivieresexport_3');
+    map.getPane('pane_rivieresexport_3').style.zIndex = 403;
+    map.getPane('pane_rivieresexport_3').style['mix-blend-mode'] = 'normal';
+    var layer_rivieresexport_3 = new L.geoJson(json_rivieresexport_3, {
+        attribution: '',
+        interactive: true,
+        dataVar: 'json_rivieresexport_3',
+        layerName: 'layer_rivieresexport_3',
+        pane: 'pane_rivieresexport_3',
+        onEachFeature: pop_rivieresexport_3,
+        style: style_rivieresexport_3_0,
+    });
+    bounds_group.addLayer(layer_rivieresexport_3);
+    map.addLayer(layer_rivieresexport_3);
+    function pop_pointsexport_4(feature, layer) {
+        var popupContent = '<table>\
+                <tr>\
+                    <td id="titre-tableau" colspan="2" align="center"><i>Moulin</i></th>\
+                </tr>\
+                <tr>\
+                    <th class="tableau-données" scope="row">Type :</th>\
+                    <td class="tableau-données">' + (feature.properties['type'] !== null ? autolinker.link(feature.properties['type'].toLocaleString()) : '<i>Non renseigné<i>') + '</td>\
+                </tr>\
+                <tr>\
+                    <th class="tableau-données" scope="row">Nom :</th>\
+                    <td class="tableau-données">' + (feature.properties['nom'] !== null ? autolinker.link(feature.properties['nom'].toLocaleString()) : '<i>Non renseigné<i>') + '</td>\
+                </tr>\
+                <tr>\
+                    <th class="tableau-données" scope="row">Propriétaire :</th>\
+                    <td class="tableau-données">' + (feature.properties['proprietr'] !== null ? autolinker.link(feature.properties['proprietr'].toLocaleString()) : '<i>Non renseigné<i>') + '</td>\
+                </tr>\
+                <tr>\
+                    <th class="tableau-données" scope="row">Occupant :</th>\
+                    <td class="tableau-données">' + (feature.properties['occupant'] !== null ? autolinker.link(feature.properties['occupant'].toLocaleString()) : '<i>Non renseigné<i>') + '</td>\
+                </tr>\
+            </table>';
+        layer.bindPopup(popupContent, {maxHeight: 400});
+    }
+
+    function style_pointsexport_4_0() {
+        return {
+            pane: 'pane_pointsexport_4',
+            radius: 6.0,
+            opacity: 0,
+            color: 'rgba(35,35,35,1.0)',
+            dashArray: '',
+            lineCap: 'butt',
+            lineJoin: 'miter',
+            weight: 1,
+            fill: true,
+            fillOpacity: 0,
+            fillColor: 'rgba(190,207,80,1.0)',
+            interactive: true,
+        }
+    }
+    map.createPane('pane_pointsexport_4');
+    map.getPane('pane_pointsexport_4').style.zIndex = 404;
+    map.getPane('pane_pointsexport_4').style['mix-blend-mode'] = 'normal';
+    var layer_pointsexport_4 = new L.geoJson(json_pointsexport_4, {
+        attribution: '',
+        interactive: true,
+        dataVar: 'json_pointsexport_4',
+        layerName: 'layer_pointsexport_4',
+        pane: 'pane_pointsexport_4',
+        onEachFeature: pop_pointsexport_4,
+        pointToLayer: function (feature, latlng) {
+            var context = {
+                feature: feature,
+                variables: {}
+            };
+            return L.circleMarker(latlng, style_pointsexport_4_0(feature));
+        },
+    });
+    bounds_group.addLayer(layer_pointsexport_4);
+    map.addLayer(layer_pointsexport_4);
+    function pop_sourceexport_5(feature, layer) {
+        var popupContent = '<table>\
+                <tr>\
+                    <td id="titre-tableau" colspan="2" align="center"><i>Source</i></th>\
+                </tr>\
+                <tr>\
+                    <td class="tableau-données" align="center" colspan="2">' + (feature.properties['nom'] !== null ? autolinker.link(feature.properties['nom'].toLocaleString()) : '<i>Non renseigné<i>') + '</td>\
+                </tr>\
+            </table>';
+        layer.bindPopup(popupContent, {maxHeight: 400});
+    }
+
+    function style_sourceexport_5_0() {
+        return {
+            pane: 'pane_sourceexport_5',
+            radius: 6.0,
+            opacity: 0,
+            color: 'rgba(35,35,35,1.0)',
+            dashArray: '',
+            lineCap: 'butt',
+            lineJoin: 'miter',
+            weight: 1,
+            fill: true,
+            fillOpacity: 0,
+            fillColor: 'rgba(125,139,143,1.0)',
+            interactive: true,
+        }
+    }
+    map.createPane('pane_sourceexport_5');
+    map.getPane('pane_sourceexport_5').style.zIndex = 405;
+    map.getPane('pane_sourceexport_5').style['mix-blend-mode'] = 'normal';
+    var layer_sourceexport_5 = new L.geoJson(json_sourceexport_5, {
+        attribution: '',
+        interactive: true,
+        dataVar: 'json_sourceexport_5',
+        layerName: 'layer_sourceexport_5',
+        pane: 'pane_sourceexport_5',
+        onEachFeature: pop_sourceexport_5,
+        pointToLayer: function (feature, latlng) {
+            var context = {
+                feature: feature,
+                variables: {}
+            };
+            return L.circleMarker(latlng, style_sourceexport_5_0(feature));
+        },
+    });
+    bounds_group.addLayer(layer_sourceexport_5);
+    map.addLayer(layer_sourceexport_5);
+        setBounds();
+</script>

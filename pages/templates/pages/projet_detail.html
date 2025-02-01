@@ -1,0 +1,18 @@
+{% extends 'pages/base.html' %}
+
+{% block style%}{%endblock%}
+
+{% block title %}{{ projet.titre }}{% endblock %}
+
+{% block content %}
+<div id="titre-droite">
+<h1>{{ projet.titre }}</h1>
+</div>
+<img src="{{ projet.image.url }}" alt="{{ projet.titre }}">
+<div id="droite-texte">
+<p>{{ projet.description }}</p>
+</div>
+{% if projet.lien %}
+    <a href="{{ projet.lien }}">Visiter le projet</a>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,120 @@
+.bandeau-projet {
+    padding-bottom: 5vh;
+    padding-top: 3vh;
+    padding-left: 5vw;
+    padding-right: 5vw;
+    border-bottom: solid 3px;
+    display: flex;
+}
+
+.bandeau-projet.blanc{
+    background: #ffffffe7;
+}
+
+.bandeau-projet.jaune{
+    background: #e8e9d1da;
+}
+
+.bandeau-projet-image {
+    width: 10vw;
+    object-fit: contain;
+    border: solid 2px;
+}
+
+.boite-bandeau-projet-texte {
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    width: 100%;
+    background-color: rgb(232 233 209);
+}
+
+.projet-redirection {
+    text-align: right;
+    padding-right : 15px;
+}
+
+.boite-bandeau-projet-image {
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    display: flex;
+    align-content: center;
+    align-items: center;
+    background-color: rgb(232 233 209);
+}
+
+.bandeau-projet-titre {
+    background-color: rgb(78 75 70);
+    border-radius: 5px;
+    font-size: 15px;
+    display: flex;
+}
+
+.bandeau-projet-titre-type {
+    background-color: rgb(232 233 209);
+    color: rgb(78 75 70);
+    border-radius: 5px;
+    margin: 15px;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+} 
+.bandeau-projet-titre-titre {
+    color: rgb(232 233 209);
+}
+
+.bandeau-projet-description {
+    padding: 15px;
+}
+
+.bandeau-projet-image {
+    background-color: rgb(78 75 70);
+    padding: 15px;
+}
+
+#base-top-bandeau {
+    display: flex;
+    align-items: center;
+    border-bottom: solid 5px;
+    background-color: rgb(232 233 209); 
+}
+
+.base-top-logo {
+    width: 75px;
+    height: 100%;
+    border-right: 5px;
+}
+.base-top-boutons {
+    display: flex;
+    gap: 20px;
+    background-color: rgb(78 75 70);
+    margin-left: 50px;
+    border-radius: 5px;
+    font-family: 'Trebuchet MS';
+} 
+.base-top-boutons:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    right: -10px;  /* Déplace la ligne à mi-chemin du gap */
+    top: 50%;
+    transform: translateY(-50%);  /* Centre verticalement */
+    width: 5px;  /* Épaisseur de la ligne */
+    height: 60%;  /* Hauteur de la ligne */
+    background-color: rgb(232 233 209);  /* Couleur de la ligne */
+}
+.base-top-boutons a {
+    color: rgb(232 233 209);
+}
+.base-top-boutons a:visited {
+    color: rgb(232 233 209);
+}
+.base-top-boutons a:hover {
+    color: rgb(232 233 209);
+}
+.base-top-bouton-individuel {
+    width: 120px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    font-size: 20px;
+
+}

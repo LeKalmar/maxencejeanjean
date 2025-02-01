@@ -1,0 +1,450 @@
+{% extends 'pages/base.html' %}
+{% load static %}
+{% block title %} Cadastre de J. Desailly {% endblock %}
+{% block style %}
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+    		integrity="sha384-o/2yZuJZWGJ4s/adjxVW71R+EO/LyCwdQfP5UWSgX/w87iiTXuvDZaejd3TsN7mf"
+    		crossorigin=""/>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans">
+	<link rel="stylesheet" href="{% static 'pages/css/desailly-leaflet/carte-desailly.css' %}">
+    <link rel="stylesheet" href="{% static 'pages/css/desailly-leaflet/leaflet.css' %}">
+    <link rel="stylesheet" href="{% static 'pages/css/desailly-leaflet/leaflet-search.css' %}">
+    <link rel="stylesheet" href="{% static 'pages/css/desailly-leaflet/qgis2web.css' %}"><link rel="stylesheet" href="{% static 'pages/css/desailly-leaflet/fontawesome-all.min.css' %}">
+    <link rel="stylesheet" href="{% static 'pages/css/desailly-leaflet/leaflet-control-geocoder.Geocoder.css' %}">
+    <link rel="stylesheet" href="{% static 'pages/css/desailly-leaflet/leaflet-measure.css' %}">
+	<link rel="stylesheet" href="{% static 'pages/css/carte-desailly.css' %}">
+  	<script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+   			integrity="sha384-okbbMvvx/qfQkmiQKfd5VifbKZ/W8p1qIsWvE1ROPUfHWsDcC8/BnHohF7vPg2T6"
+   			crossorigin=""></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-search@2.9.2/dist/leaflet-search.min.css" />
+    <script src="https://unpkg.com/leaflet-search@2.9.2/dist/leaflet-search.min.js"></script>
+ 	<style type="text/css">
+	#blanc {
+		height: 100px;
+	}
+  	</style>
+  {% endblock %}
+
+{% block content %}
+<!-- Boîte de la carte -->
+	<div id="cadre-map">
+		<div id="titre-carte">
+			<div class="gros-titre-carte"><div>~&nbsp</div><div><center>Arras à l'aube du XVIIIe siècle</center></div><div>&nbsp~</div></div>
+			<div class="sous-titre-carte"><center>Numérisation & indexation du plan parcellaire de Jean Desailly (1702-1705), du plan-relief de Ladevèze (1716-1718) et de cartes anonymes des fortifications d'Arras (1701) par <b>Maxence Jeanjean (2023-2024)</b></center></div>
+		</div>
+		<div id="experience-telephone">
+			<img src="{% static 'pages/images/cartes/desailly-legende/phone-rotation.png' %}" width="5%" height="5%"/>
+			<p><center>Pour une expérience optimale sur la carte, tournez votre téléphone</center></p>
+			<img src="{% static 'pages/images/cartes/desailly-legende/phone-rotation.png' %}" width="5%" height="5%"/>
+		</div>
+		<div id="carte-et-legende">
+			<div id="legende-et-titre">
+				<div class="mapLegend-title">Légende :</div>
+				<div class="mapLegend">
+					<div>
+						<p id="titre-section-legende">Clergé séculier</p>
+					</div>
+					<div id="légende-ligne">
+						<img class="légende-logo" src="{% static 'pages/images/cartes/desailly-legende/cathedrale.png' %}"/>
+						<p class="légende-données">Cathédrale</p>
+					</div>
+					<div id="légende-ligne">
+						<img class="légende-logo" src="{% static 'pages/images/cartes/desailly-legende/eglise-paroissiale.png' %}"/>
+						<p class="légende-données">Église paroissiale</p>
+					</div>
+					<div id="légende-ligne">
+						<img class="légende-logo" src="{% static 'pages/images/cartes/desailly-legende/Eglise.png' %}"/>
+						<p class="légende-données">Église</p>
+					</div>
+					<div id="légende-ligne">
+						<img class="légende-logo" src="{% static 'pages/images/cartes/desailly-legende/Paroisse.png' %}"/>
+						<p class="légende-données">Paroisse</p>
+					</div>
+					<div id="légende-ligne">
+						<img class="légende-logo" src="{% static 'pages/images/cartes/desailly-legende/bat-religieux.png' %}"/>
+						<p class="légende-données">Bâtiment religieux</p>
+					</div>
+					<div id="légende-ligne">
+						<img class="légende-logo" src="{% static 'pages/images/cartes/desailly-legende/cimetiere.png' %}"/>
+						<p class="légende-données">Cimetière</p>
+					</div>				
+					<div>
+						<p id="titre-section-legende">Clergé régulier</p>
+					</div>
+					<div id="légende-ligne">
+						<img class="légende-logo" src="{% static 'pages/images/cartes/desailly-legende/abbaye-saint-vaast.png' %}" width="115%" height="115%"/>
+						<p class="légende-données">Abbaye Saint-Vaast</p>
+					</div>
+					<div id="légende-ligne">
+						<img class="légende-logo" src="{% static 'pages/images/cartes/desailly-legende/Abbaye.png' %}" width="75%" height="75%"/>
+						<p class="légende-données">Abbaye</p>
+					</div>
+					<div id="légende-ligne">
+						<img class="légende-logo" src="{% static 'pages/images/cartes/desailly-legende/refuge-abbaye.png' %}" width="115%" height="115%"/>
+						<p class="légende-données">Refuge d'Abbaye</p>
+					</div>
+					<div id="légende-ligne">
+						<img class="légende-logo" src="{% static 'pages/images/cartes/desailly-legende/Couvent.png' %}" width="100%" height="100%"/>
+						<p class="légende-données">Couvent</p>
+					</div>
+					<div id="légende-ligne">
+						<img class="légende-logo" src="{% static 'pages/images/cartes/desailly-legende/Couvent-point.png' %}"/>
+						<p class="légende-données">Bâtiment conventuel</p>
+					</div>
+					<div>
+						<p id="titre-section-legende">Administration</p>
+					</div>
+					<div id="légende-ligne">
+						<img class="légende-logo" src="{% static 'pages/images/cartes/desailly-legende/bat-public.png' %}"/>
+						<p class="légende-données">Bâtiment public</p>
+					</div>					
+					<div id="légende-ligne">
+						<img class="légende-logo" src="{% static 'pages/images/cartes/desailly-legende/etats-artois.png' %}" width="100%" height="100%"/>
+						<p class="légende-données">Etats d'Artois</p>
+					</div>
+					<div id="légende-ligne">
+						<img class="légende-logo" src="{% static 'pages/images/cartes/desailly-legende/Justice.png' %}" width="100%" height="100%"/>
+						<p class="légende-données">Justice</p>
+					</div>
+					<div id="légende-ligne">
+						<img class="légende-logo" src="{% static 'pages/images/cartes/desailly-legende/hotel-ville.png' %}" width="100%" height="100%"/>
+						<p class="légende-données">Hôtel de ville</p>
+					</div>
+					<div id="légende-ligne">
+						<img class="légende-logo" src="{% static 'pages/images/cartes/desailly-legende/Prison.png' %}" width="100%" height="100%"/>
+						<p class="légende-données">Prison</p>
+					</div>
+					<div id="légende-ligne">
+						<img class="légende-logo" src="{% static 'pages/images/cartes/desailly-legende/Gibetx.png' %}" width="50%" height="50%"/>
+						<p class="légende-données">Gibet</p>
+					</div>
+					<div>
+						<p id="titre-section-legende">Militaire</p>
+					</div>
+					<div id="légende-ligne">
+						<img class="légende-logo" src="{% static 'pages/images/cartes/desailly-legende/Caserne.png' %}" width="100%" height="100%"/>
+						<p class="légende-données">Caserne</p>
+					</div>
+					<div id="légende-ligne">
+						<img class="légende-logo" src="{% static 'pages/images/cartes/desailly-legende/caserne-surface.png' %}"/>
+						<p class="légende-données">Bâtiment de caserne</p>
+					</div>
+					<div id="légende-ligne">
+						<img class="légende-logo" src="{% static 'pages/images/cartes/desailly-legende/chateau.png' %}" width="100%" height="100%"/>
+						<p class="légende-données">Château</p>
+					</div>
+					<div id="légende-ligne">
+						<img class="légende-logo" src="{% static 'pages/images/cartes/desailly-legende/Magasin.png' %}" width="100%" height="100%"/>
+						<p class="légende-données">Magasin</p>
+					</div>
+					<div id="légende-ligne">
+						<img class="légende-logo" src="{% static 'pages/images/cartes/desailly-legende/Porte.png' %}" width="100%" height="100%"/>
+						<p class="légende-données">Porte</p>
+					</div>
+					<div id="légende-ligne">
+						<img class="légende-logo" src="{% static 'pages/images/cartes/desailly-legende/fausse-porte.png' %}" width="100%" height="100%"/>
+						<p class="légende-données">Fausse porte</p>
+					</div>
+					<div id="légende-ligne">
+						<img class="légende-logo" src="{% static 'pages/images/cartes/desailly-legende/Rempart.png' %}"/>
+						<p class="légende-données">Rempart</p>
+					</div>
+					<div id="légende-ligne">
+						<img class="légende-logo" src="{% static 'pages/images/cartes/desailly-legende/denivele.png' %}"/>
+						<p class="légende-données">Dénivelé</p>
+					</div>
+					<div id="légende-ligne">
+						<img class="légende-logo" src="{% static 'pages/images/cartes/desailly-legende/Terre-plein.png' %}"/>
+						<p class="légende-données">Terre-plein</p>
+					</div>				
+					<div>
+						<p id="titre-section-legende">Services</p>
+					</div>
+					<div id="légende-ligne">
+						<img class="légende-logo" src="{% static 'pages/images/cartes/desailly-legende/Hospice.png' %}" width="100%" height="100%"/>
+						<p class="légende-données">Hospice</p>
+					</div>
+					<div id="légende-ligne">
+						<img class="légende-logo" src="{% static 'pages/images/cartes/desailly-legende/jeu-paume.png' %}" width="100%" height="100%"/>
+						<p class="légende-données">Jeu de paume</p>
+					</div>
+					<div id="légende-ligne">
+						<img class="légende-logo" src="{% static 'pages/images/cartes/desailly-legende/ecole.png' %}" width="100%" height="100%"/>
+						<p class="légende-données">École</p>
+					</div>
+					<div id="légende-ligne">
+						<img class="légende-logo" src="{% static 'pages/images/cartes/desailly-legende/pauvrete.png' %}" width="100%" height="100%"/>
+						<p class="légende-données">Pauvreté</p>
+					</div>
+					<div id="légende-ligne">
+						<img class="légende-logo" src="{% static 'pages/images/cartes/desailly-legende/Pensionnat.png' %}" width="100%" height="100%"/>
+						<p class="légende-données">Pensionnat</p>
+					</div>
+					<div id="légende-ligne">
+						<img class="légende-logo" src="{% static 'pages/images/cartes/desailly-legende/Port.png' %}" width="100%" height="100%"/>
+						<p class="légende-données">Port</p>
+					</div>
+					<div>
+						<p id="titre-section-legende">Moulins</p>
+					</div>
+					<div id="légende-ligne">
+						<img class="légende-logo" src="{% static 'pages/images/cartes/desailly-legende/moulin-bois.png' %}" width="100%" height="100%"/>
+						<p class="légende-données">Moulin en bois</p>
+					</div>
+					<div id="légende-ligne">
+						<img class="légende-logo" src="{% static 'pages/images/cartes/desailly-legende/moulin-tour.png' %}" width="100%" height="100%"/>
+						<p class="légende-données">Moulin à tour</p>
+					</div>
+					<div id="légende-ligne">
+						<img class="légende-logo" src="{% static 'pages/images/cartes/desailly-legende/moulin-detruit.png' %}" width="100%" height="100%"/>
+						<p class="légende-données">Moulin détruit</p>
+					</div>
+					<div id="légende-ligne">
+						<img class="légende-logo" src="{% static 'pages/images/cartes/desailly-legende/moulin-eau.png' %}" width="100%" height="100%"/>
+						<p class="légende-données">Moulin à eau</p>
+					</div>
+					<div>
+						<p id="titre-section-legende">Cadastre</p>
+					</div>
+					<div id="légende-ligne">
+						<img class="légende-logo" src="{% static 'pages/images/cartes/desailly-legende/bat.png' %}"/>
+						<p class="légende-données">Bâtiment</p>
+					</div>
+					<div id="légende-ligne">
+						<img class="légende-logo" src="{% static 'pages/images/cartes/desailly-legende/Cour.png' %}"/>
+						<p class="légende-données">Cour</p>
+					</div>
+					<div id="légende-ligne">
+						<img class="légende-logo" src="{% static 'pages/images/cartes/desailly-legende/herbe.png' %}"/>
+						<p class="légende-données">Friche</p>
+					</div>
+					<div id="légende-ligne">
+						<img class="légende-logo" src="{% static 'pages/images/cartes/desailly-legende/Jardin.png' %}"/>
+						<p class="légende-données">Jardin</p>
+					</div>
+					<div id="légende-ligne">
+						<img class="légende-logo" src="{% static 'pages/images/cartes/desailly-legende/Pré.png' %}"/>
+						<p class="légende-données">Prairie</p>
+					</div>
+					<div id="légende-ligne">
+						<img class="légende-logo" src="{% static 'pages/images/cartes/desailly-legende/Labour.png' %}"/>
+						<p class="légende-données">Terres à labour</p>
+					</div>
+					<div id="légende-ligne">
+						<img class="légende-logo" src="{% static 'pages/images/cartes/desailly-legende/labour-jardinage.png' %}"/>
+						<p class="légende-données">Labour & jardinage</p>
+					</div>					
+					<div id="légende-ligne">
+						<img class="légende-logo" src="{% static 'pages/images/cartes/desailly-legende/Marais.png' %}"/>
+						<p class="légende-données">Marais</p>
+					</div>			
+					<div id="légende-ligne">
+						<img class="légende-logo" src="{% static 'pages/images/cartes/desailly-legende/Disparu.png' %}"/>
+						<p class="légende-données">Disparu</p>
+					</div>					
+					<div id="légende-ligne">
+						<img class="légende-logo" src="{% static 'pages/images/cartes/desailly-legende/Masse.png' %}"/>
+						<p class="légende-données">Masse</p>
+					</div>
+					<div>
+						<p id="titre-section-legende">Chaussée</p>
+					</div>
+					<div id="légende-ligne">
+						<img class="légende-logo" src="{% static 'pages/images/cartes/desailly-legende/Pont.png' %}"/>
+						<p class="légende-données">Pont</p>
+					</div>
+					<div id="légende-ligne">
+						<img class="légende-logo" src="{% static 'pages/images/cartes/desailly-legende/Escalier.png' %}"/>
+						<p class="légende-données">Escalier</p>
+					</div>
+					<div id="légende-ligne">
+						<img class="légende-logo" src="{% static 'pages/images/cartes/desailly-legende/gue.png' %}"/>
+						<p class="légende-données">Gué</p>
+					</div>
+					<div>
+						<p id="titre-section-legende">Eau</p>
+					</div>
+					<div id="légende-ligne">
+						<img class="légende-logo" src="{% static 'pages/images/cartes/desailly-legende/eau-surface.png' %}"/>
+						<p class="légende-données">Eau en surface</p>
+					</div>
+					<div id="légende-ligne">
+						<img class="légende-logo" src="{% static 'pages/images/cartes/desailly-legende/eau-souterrain.png' %}"/>
+						<p class="légende-données">Eau souterraine</p>
+					</div>					
+					<div>
+						<p id="titre-section-legende">Divers</p>
+					</div>
+					<div id="légende-ligne">
+						<img class="légende-logo" src="{% static 'pages/images/cartes/desailly-legende/arbre-beaumetz.png' %}" width="100%" height="100%"/>
+						<p class="légende-données">Arbre de Beaumetz</p>
+					</div>
+					<div id="légende-ligne">
+						<img class="légende-logo" src="{% static 'pages/images/cartes/desailly-legende/Arbre.png' %}" width="75%" height="75%"/>
+						<p class="légende-données">Arbre</p>
+					</div>
+					<div id="légende-ligne">
+						<img class="légende-logo" src="{% static 'pages/images/cartes/desailly-legende/Calvaire.png' %}" width="50%" height="50%"/>
+						<p class="légende-données">Calvaire</p>
+					</div>					
+					<div id="légende-ligne">
+						<img class="légende-logo" src="{% static 'pages/images/cartes/desailly-legende/Puits.png' %}" width="100%" height="100%"/>
+						<p class="légende-données">Puits</p>
+					</div>
+					<div id="légende-ligne">
+						<img class="légende-logo" src="{% static 'pages/images/cartes/desailly-legende/Source.png' %}" width="100%" height="100%"/>
+						<p class="légende-données">Source</p>
+					</div>						
+				</div>
+			</div>
+		<div id="map" class="mapCanvas"></div>
+        <script src="{% static 'pages/js/qgis2web_expressions.js' %}"></script>
+        <script src="{% static 'pages/js/leaflet.js' %}"></script>
+        <script src="{% static 'pages/js/multi-style-layer.js' %}"></script>
+        <script src="{% static 'pages/js/leaflet.rotatedMarker.js' %}"></script>
+        <script src="{% static 'pages/js/leaflet.pattern.js' %}"></script>
+        <script src="{% static 'pages/js/leaflet-hash.js' %}"></script>
+        <script src="{% static 'pages/js/Autolinker.min.js' %}"></script>
+        <script src="{% static 'pages/js/rbush.min.js' %}"></script>
+        <script src="{% static 'pages/js/labelgun.min.js' %}"></script>
+        <script src="{% static 'pages/js/labels.js' %}"></script>
+        <script src="{% static 'pages/js/leaflet-control-geocoder.Geocoder.js' %}"></script>
+        <script src="{% static 'pages/js/leaflet-measure.js' %}"></script>
+        <script src="{% static 'pages/js/proj4.js' %}"></script>
+        <script src="{% static 'pages/js/proj4leaflet.js' %}"></script>
+        <script src="{% static 'pages/js/leaflet-search.js' %}"></script>
+        <script src="{% static 'pages/data/cadastreexport_0.js' %}"></script>
+        <script src="{% static 'pages/data/lieuxexport_1.js' %}"></script>
+        <script src="{% static 'pages/data/routesexport_2.js' %}"></script>
+        <script src="{% static 'pages/data/rivieresexport_3.js' %}"></script>
+        <script src="{% static 'pages/data/pointsexport_4.js' %}"></script>
+        <script src="{% static 'pages/data/sourceexport_5.js' %}"></script>
+        <script src="{% static 'pages/js/carte-principale.js' %}"></script>
+		{% include 'pages/projets/desailly-js.html' %}
+		</div>
+	</div>
+</div>
+
+	<!-- Corps de page -->
+	<div id="description">
+		<div  id="citation"><i>Permettez moi s’il vous plaît messeigneurs [abbés, grand prieur et religieux de l'abbaye royale de Saint-Vaast d'Arras] de déclarer ingénument que depuis que vous m’avez fait l’honneur de m’employer aux mesurages, arpentages, constructions des plans et cartes figuratives que vous jugez nécessaires pour la conservation de vos droits et des biens de vos vassaux, je m’aperçois que la passion que j’ai de faire quelque chose qui vous soit utile m’inspire des desseins qui ne m’étaient point encore venus dans l’esprit et me donna pour les exécuter des forces que je ne sentais pas auparavant.</i>- Jean Desailly, 1702.</div>
+		<!--1er paragraphe-->
+		<div  id="titre-gauche"><center>Jean Desailly<center></div>
+		<div id="gauche" align="center">
+			<figure id="boite-image-gauche">
+				<img class="gauche-image" src="{% static 'pages/images/cartes/desailly-explications/desailly-signature.png' %}"/>
+				<figcaption id="gauche-texte" class="small">Signature de J. Desailly.</figcaption>
+			</figure>			
+			<p>La vie du cartographe <b>Jean Desailly</b> (orthographié également <b>De Sailly</b>) est peu connue des historiens d'Arras. Il est probable qu'il soit né dans les années 1670 près du village de <a href="https://fr.wikipedia.org/wiki/Couturelle" target="_blank">Couturelle</a>. Il se marie à Lille en 1690 avant de s'installer à Arras vers 1700, devenant <a href="https://fr.wikipedia.org/wiki/Arpentage" target="_blank">arpenteur</a> pour l'abbaye Saint-Vaast d'Arras. Ses seuls travaux connus sont le plan parcellaire présenté ci-dessus, composé de 3 atlas et d'un plan de masse de la ville intra-muros dressé entre 1702 et 1705, ainsi qu'un plan du village de Meurchin, dont l'abbaye Saint-Vaast était le seigneur. Après cette dernière production, nous perdons sa trace jusqu'en 1744 où il est déclaré décédé dans l'acte de mariage de l'une de ses filles.</p>
+			<p>On lui attribue également une carte en 1739 qui n'est probablement pas de son fait.</p>
+		</div>
+
+		<!--2ème paragraphe-->
+		<div  id="titre-droite"><center>Le plan parcellaire<center></div>
+		<div id="droite" align="center">
+			<figure id="boite-image-droite" align="center">
+				<img class="droite-image" src="{% static 'pages/images/cartes/desailly-explications/Desailly Nord 1702 petit.png' %}"/>
+				<figcaption id="droite-texte" class="small"><i>Plan et carte figurative des prés, marais, jardins, terres à labour & héritages situés entre les rues des Quatre Fils Aymond et Demencourt depuis y compris le glacis des fortifications de cette ville jusqu'au chemin des Malvaux.</i> - Jean Desailly, 1702.<br/>Le format de carte dépliable dans le livre est clairement visible ici.</figcaption>
+			</figure>
+			<h3>Les cartes</h3>
+			<p>Le plan parcellaire de Jean Desailly est composé de 3 atlas connus aux archives sous les cotes <a href="http://archivesenligne.pasdecalais.fr/v2/ark:/64297/eda276a7053fd7ea77dde2ac20c4a13b" target="_blank">CPL 1350</a>, comprenant 8 cartes ; <a href="http://archivesenligne.pasdecalais.fr/v2/ark:/64297/0d086d80bc7867689971c4fa0f569b7e" target="_blank">CPL 1351</a> comprenant 7 cartes et <a href="http://archivesenligne.pasdecalais.fr/v2/ark:/64297/6866f7088c43892832b5afa5e327f396" target="_blank">CPL 1352</a>, comprenant 8 cartes. Afin de mieux nous y retrouver dans ces différents atlas, j'ai décidé de les nommer comme suit : <b>Atlas d'Achicourt</b> pour le CPL 1350, <b>Atlas de Sainte-Catherine</b> pour le CPL 1351, et <b>Atlas de Blangy</b> pour le CPL 1352. Au XVIIIe siècle, les cartes doivent être dessinées physiquement sur papier, c'est ce qui explique le choix du cartographe de séparer en différents "cantons" ses atlas, afin de représenter à une échelle lisible les différentes parcelles dans un format tenant dans un livre. Ces cantons ont été tous regroupés dans une carte de 2m x 2m (CPL 840 des archives départementales) à une échelle plus grande et donc moins précise.</p>
+			<p>Chacun des 22 cantons représente un territoire aux dimensions comprises entre 31.7 ha (canton 4 de l'atlas d'Achicourt) et 159.8 ha (canton 8 de l'atlas d'Achicourt). Sont représentées les différentes parcelles, dont la numérotation est remise à 0 pour chaque canton (on trouve ainsi 22 parcelles portant le numéro 19) colorées selon l'utilisation de la parcelle au moment des relevés par l'arpenteur. Voici la légende des cartes réalisées par Jean Desailly :</p>
+			<figure align="center"><img src="{% static 'pages/images/cartes/desailly-explications/Légende Desailly.png' %}" width="55%" height="55%"/></figure>
+			<p>Nous pouvons constater que cette légende est assez peu fournie, ce qui impose de se reporter à la matrice trouvable dans l'atlas pour connaître les détails de l'occupation d'une parcelle. Cette matrice est elle aussi assez maigre, mais permet de différencier notamment une parcelle de "jardin" et de "pré", représentées toutes deux dans le même ton de vert sur le plan parcellaire, mais bien différenciées dans la matrice par Jean Desailly.</p>
+			<figure id="boite-image-droite" align="center">
+				<img class="droite-image" src="{% static 'pages/images/cartes/desailly-explications/exemple-matrice.png' %}"/>
+				<figcaption id="droite-texte" class="small">Exemple d'une page de la matrice. Extrait : <i>N°32 | Terres à jardinage appartenant à François Cantret à cause de sa femme, contenant trois boistelées et vingt deux verges, occupé par lui même</i> - Jean Desailly, 1702.</figcaption>
+			</figure>
+			<h3>La matrice</h3>
+			<p>La particularité du plan parcellaire de Jean Desailly, c'est donc son format d'atlas avec des cartes dépliables. La matrice est un texte accompagnant un plan parcellaire ou un cadastre, où chaque numéro de parcelle est repris avec toutes les informations concernant la parcelle. La matrice occupe la majeure partie des pages de chaque atlas, rangée de sorte que chaque carte de canton soit suivie de sa matrice individuelle. Contrairement aux matrices du XIXe siècle mieux ordonnées sous la forme de tableau, celle-ci est assez aléatoire dans les informations qu'elle transmet. Nous pouvons parfois trouver le nom du lieu-dit, de l'occupant de la parcelle ou des notes annexes sur l'ancien propriétaire ou l'ancien usage du lieu. Cependant, trois informations sont données pour chaque entrée : le type d'usage, le propriétaire et les dimensions de la parcelle. Ces trois informations très importantes, couplées aux cartes détaillées de chaque canton, sont suffisantes pour justifier une numérisation afin de rendre la recherche dans ces atlas bien plus rapide que dans leur format actuel.
+		</div>
+
+		<!--3ème paragraphe-->
+		<div id="titre-gauche"><center>Sa restauration numérique</center></div>
+		<div id="gauche" align="center">
+			<div id="boite-texte-image">
+				<figure id="boite-image-gauche">
+					<img class="gauche-image" src="{% static 'pages/images/cartes/desailly-explications/exemple-géoréférencement.png' %}"/>
+					<figcaption id="gauche-texte" class="small">Exemple de géoréférencement de la carte historique (gauche) grâce à l'emprise cartographique actuelle tirée d'Openstreetmap (droite). Les points rouges sont les points de comparaison établis entre les deux cartes, permettant la déformation de la carte historique afin qu'elle suive la projection actuelle.</figcaption>
+				</figure>
+				<h3>Le géoréférencement</h3>
+				<p>L'objectif premier de ce travail est de restaurer ces cartes de façon numérique, afin de regrouper les 22 cantons en une seule grande carte accessible, interactive et éducative. Pour cela, il a fallu traverser de nombreuses étapes que je résumerai ici en quelques lignes, mais que vous pouvez retrouver en détails dans mon mémoire <i>Une abbaye, des pouvoirs : un essai cartographique sur les pouvoirs de l'abbaye Saint-Vaast au XVIIIe siècle.</i></p>
+				<p>La numérisation d'une carte historique passe tout d'abord par son géoréférencement. Ce terme, assez peu parlant au premier abord, désigne l'action de reporter des coordonnées géographiques sur une carte historique afin de la référencer dans une projection cartographique actuelle. Les anciennes techniques de cartographie étant très différentes et peu précises, ce report de coordonnées donne lieu à des déformations sur la carte orginelle qui ne permettent pas une précision parfaite dans la superposition d'une carte historique et de l'emprise actuelle. Pour réaliser le géoréférencement et l'ensemble des étapes qui vont suivre, nous utiliserons un <a href="https://fr.wikipedia.org/wiki/Syst%C3%A8me_d%27information_g%C3%A9ographique" target="_blank">SIG (Service d'Information Géographique)</a> gratuit et opensource nommé <a href="https://www.qgis.org/fr/site/" target="_blank">QGIS</a>.</p>
+				<figure id="boite-image-gauche">
+					<img class="gauche-image" src="{% static 'pages/images/cartes/desailly-explications/numérisation sans valeur.png' %}"/>
+					<figcaption id="gauche-texte" class="small">Plan parcellaire numérisé avant le traitement des données, superposé sur la carte openstreetmap</figcaption>
+				</figure>
+				<h3>Numérisation et indexation</h3>
+				<p>Lorsque les cartes sont géoréférencées, il faut ensuite numériser les informations géographiques présentes sur les cartes historiques. La numérisation se fait à la main (ou plutôt à la souris), en créant différents types de géométries : les polygones représentent des aires, comme les parcelles de la carte ; les lignes représentent le cours des rivières ou la forme d'une route ; les points représentent quant à eux des objets de petite taille à l'échelle cartographique, comme un arbre, un puits ou un moulin.</p>
+				<p>Ces géométries ont néanmoins besoin de valeurs pour être utiles. Pour cela, il est nécessaire pour chaque polygone, ligne ou point de créer un tableau de valeur. Pour la couche de polygones représentant les parcelles du plan, on trouve ainsi un tableau de valeur comprenant les variables suivantes : la cote aux archives du document source ; le numéro du canton ; le numéro de la parcelle ; la fonction de la parcelle ; son propriétaire ; son occupant ; éventuellement son nom si elle est un lieu-dit ; ses dimensions et enfin des notes complémentaires. Ces valeurs permettent d'appliquer des couleurs pour chaque parcelle en fonction de leur type d'occupation, c'est pourquoi nous trouvons des couleurs différentes pour les jardins, terres en friche, champs, marais, bâtiments, etc.</p>
+				<p>L'extérieur de la ville ayant été désormais indexé grâce au plan parcellaire et sa matrice, il nous maque dès lors une pièce très importante du puzzle : la ville <i>intra-muros</i>.</p>
+			</div>
+		</div>
+
+		<!--4ème paragraphe-->
+		<div id="titre-droite"><center>La restauration numérique du plan-relief</center></div>
+		<div id="droite" align="center">
+			<div id="boite-texte-image">
+				<figure id="boite-image-droite" align="center">
+					<img class="droite-image" src="{% static 'pages/images/cartes/desailly-explications/collage-maquette.png' %}"/>
+					<figcaption id="droite-texte" class="small">Résultat du collage de plus de 300 photographies du plan-relief afin de le reconstituer sur un plan.</figcaption>
+				</figure>
+				<h3> Choix du plan-relief comme source</h3>
+				<p>Pour représenter l'intérieur de la ville fortifiée d'Arras en détails, le plan parcellaire de Desailly n'était malheureusement pas suffisant. En effet, seules les parcelles du Pré-Cagnon sont disponibles, le reste de la ville ayant été réalisé en plan de masse duquel se détachent les possessions de l'abbaye Saint-Vaast et les édifices religieux de la ville. Cependant, une autre source était disponible pour enrichir notre carte, qui n'est autre que le <a href="https://fr.wikipedia.org/wiki/Plan-relief_d%27Arras" target="_blank">plan-relief de la ville</a> réalisé par l'ingénieur Ladevèze entre 1716 et 1718. La proximité de réalisation entre le plan parcellaire et le plan-relief permet ainsi de conserver une cohérence entre les deux ensembles, mais la numérisation de la maquette a été une tâche assez fastidieuse.</p>
+				<h3>Numérisation du plan-relief</h3>
+				<p>Il a fallu se rendre plusieurs fois au musée des beaux arts d'Arras pour prendre environ 300 photos de la maquette dans un angle parfaitement droit à 1m de hauteur. Ces photos effectuées, il ne restait plus qu'à les coller les unes aux autres avec Photoshop. Cette tâche complexe due à la nature artisanale de cette technique a échoué à deux reprises, notamment à cause des déformations causées par la lentille du téléphone. Cependant, après avoir compris à quels endroits de chaque photo il était possible de réaliser des points de comparaison sans être freiné par une quelconque déformation, la troisième tentative de collage fut un succès, ce qui donna le montage ci-contre.</p>
+				<p>Une fois le montage réalisé, il fallait également le géoréférencer. Malgré quelques décalages persistant à cause des déformations de la lentille, le résultat était très satisfaisant et les points de comparaison entre le montage et la carte actuelle de la ville ont ainsi permis d'obtenir une carte géoréférencée prête à la numérisation.</p>
+				<p>Pour garantir une homogénéité entre les deux sources majeures de ce projet, la charte graphique utilisée pour la numérisation du plan parcellaire de Desailly est la même pour le plan-relief, à l'exception de l'ajout d'une entrée pour les édifices publics (hôtel de ville, écoles, palais de justice, etc.) ; les casernes, qui n'existent pas hors les murs ; et une surface rayée de gris pour les quelques endroits de la maquette ayant disparu mais dont la trace des bâtiments au sol est encore visible.</p>
+				<p>Le plan-relief nous permet également de trouver une trace géographique des bâtiments importants dans la vie de la ville et de la province d'Artois. Grâce à la numérisation, il est possible de les mettre en avant comme le ferait une carte géographique actuelle à l'aide de points d'intérêt. C'est ainsi que les églises, les couvents, les bâtiments publics relatifs à l'administration de la ville ou de la province, les portes ou encore les hospices disposent chacuns d'un icône dédié permettant de naviguer aisément sur la carte et de comprendre l'organisation de la ville à l'aube du XVIIIe siècle.</p>
+				<h3>Sources annexes quant aux fortifications</h3>
+				<p>La citadelle et les fortifications n'ayant été représentées ni en détails, ni dans leur totalité dans les deux sources précédentes, il a fallu trouver de nouvelles sources pour ne pas laisser de vide sur la carte. Le <a href="http://archivesenligne.pasdecalais.fr/v2/ark:/64297/4d7830d6f75dadd24264c2a0a287030d" target="_blank">plan de masse de la ville par Desailly (1704)</a>, <a href="http://archivesenligne.pasdecalais.fr/v2/ark:/64297/156f09b8ae4da196c4ec590a9eb64b94" target="_blank">restauré en 1849</a> nous a ainsi servi à combler les lacunes du plan-relief détruit en grande partie pendant la guerre. Quant à la citadelle et aux ouvrages fortifiés devant la ville, la <a href="http://archivesenligne.pasdecalais.fr/v2/ark:/64297/bdb5746c8bb020b18423fc456eff0d3d" target="_blank">carte CPL 1286 datée de 1701</a> a été utilisée pour sa précision dans la représentation des différents ouvrages, mais aussi pour sa date très proche du plan parcellaire.</p>
+				<p>Les deux cartes principales ayant désormais été géoréférencées, numérisées et indexées, il ne restait plus qu'à créer ce site afin de rendre ces données accessibles à tous.</p>
+			</div>
+		</div>
+
+		<!--5ème paragraphe-->
+		<div  id="titre-gauche"><center>Le site internet<center></div>
+			<div id="gauche" align="center">
+				<figure id="boite-image-gauche" align="center">
+					<img class="gauche-image" src="{% static 'pages/images/cartes/desailly-explications/site-ébauche.png' %}"/>
+					<figcaption id="gauche-texte" class="small"> Toute première ébauche du site, seule la carte brute sans légende ni titre ni ce texte explicatif n'est alors disponible. La numérisation du plan-relief n'ayant pas été achevée au moment de cette capture d'écran, notez que la carte de la ville est toujours sous forme de masse.</figcaption>
+				</figure>
+				<h3>Exporter la carte</h3>
+				<p>Une fois les données traitées et mises en forme grâce à une charte graphique globale, il a fallu créer ce site internet pour héberger la carte et la rendre accessible à tous. Grâce à l'outil d'export <a href="https://leafletjs.com/" target="_blank">Leaflet</a> disponible en tant qu'extension sur QGIS, il est possible d'exporter une carte interactive et personnalisable en langage JavaScript à partir des données contenues dans notre SIG.</p>
+				<p>La carte ayant été exportée, nous devons maintenant établir l'architecture du site autour d'elle. J'ai ainsi codé entièrement en HTML & CSS le reste de la page, tout en révisant le code de la carte pour la rendre plus esthétique et ajouter de nouvelles fonctionnalités. La carte n'est en effet pas qu'une seule et même image interactive, plusieurs couches sont disponibles. Grâce au bouton "couches" présent en haut à droite de la carte, il est possible de naviguer entre la carte numérisée principale et plusieurs cartes actuelles (openstreetmap, satellite et plan parcellaire actuel) pour permettre de comparer l'emplacement des bâtiments anciens et souvent disparus avec la géographie actuelle de la ville. Il est également possible de consulter les différentes cartes d'archives géoréférencées avant leur numérisation, et ce afin de respecter les normes en termes de citation des souces.</p>
+				<h3>Héberger le site</h3>
+				<p>Afin d'héberger les fichiers essentiels au fonctionnement du site, ainsi que d'obtenir un nom de domaine, je me suis penché sur deux solutions également gratuites et bien documentées. L'hébergement des fichiers se fait sur GitHub, célèbre espace de dépôt de code source de nombreux logiciels opensource. Vous pouvez retrouver <a href="https://github.com/LeKalmar/Cadastre-de-Desailly" target="_blank">ici le répertoire</a> contenant les fichiers du site internet. Github propose ensuite une solution d'hébergement gratuite sur le site Vercel, c'est pourquoi l'URL de ce site se termine en .vercel.app !</p>
+				<figure id="boite-image-gauche" align="center">
+					<img class="gauche-image" src="{% static 'pages/images/cartes/desailly-explications/exemple-parcelle.png' %}"/>
+					<figcaption id="gauche-texte" class="small"> Exemple d'une bulle s'affichant lorsque l'on clique sur une parcelle de la carte.</figcaption>
+				</figure>
+				<h3>Intérêts d'une carte interactive</h3>
+				<p>La nature même de la carte interactive permet également de montrer des photographies d'anciens monuments de la ville, pris essentiellement sur le plan-relief de celle-ci. Il est ainsi possible de cliquer sur chaque monument possédant un icône pour en obtenir une représentation photographique, ce qui permet autant de mieux se situer dans la ville que de connaître le nom des différents bâtiments présents sur le plan-relief.</p>
+				<p>Cette numérisation permet ainsi d'avoir accès en un clic à toute donnée d'une parcelle représentée sur le plan parcellaire de Jean Desailly, afin d'en connaître chaque détail mentionné dans la matrice, permettant à chacun vivant dans la zone cartographiée par Desailly de connaître l'ancien propriétaire de son terrain. Elle permet de mieux comprendre l'organisation de la ville à travers ses lieux d'importance tout comme par ses paroisses diverses en termes de densité de population, et permet ainsi de faire le lien entre la recherche historique et sa diffusion au grand public, composante essentielle de notre métier.</p>
+				<p><i>Nota : Afin d'obtenir une accessibilité pour tout type de matériel, le site fonctionne parfaitement sur mobile et tablette.</i></p>
+				<h3>Une plateforme de transmission</h3>
+				<p>A titre personnel, j'espère, à l'aide de ce site, nourrir l'appétit du public quant aux questions patrimoniales et historiques. Le plan-relief restant également un grand mystère pour un bon nombre de personnes que j'ai croisé au musée, qui ont entre autres du mal à se situer dans une ville ayant radicalement changé en deux siècles, j'espère que ce travail leur permettra de comprendre facilement la géographie d'Arras au XVIIIe siècle comparée à la géographie actuelle, sans avoir besoin de se plonger dans des recherches très approfondies qui les découragent bien souvent. Je souhaiterais également qu'elle puisse servir d'outil d'enseignement à tous ceux voulant un jour parler de l'Histoire de notre ville et de son urbanisme, ou comme support de recherche pour faciliter le travail des historiens. En quelques mots, j'espère que ce travail vivra au-delà de ma recherche et sera utile au plus grand nombre !</p>
+			</div>
+
+		<!--6ème paragraphe-->
+		<div id="titre-droite"><center>La suite ?</center></div>
+		<div id="droite" align="center">
+			<div id="boite-texte-image">
+				<figure id="boite-image-droite" align="center">
+					<img class="droite-image" src="{% static 'pages/images/cartes/desailly-explications/cadastre-xix-apercu.png' %}"/>
+					<figcaption id="droite-texte" class="small">Aperçu (mai 2024) de la numérisation en cours du cadastre napoléonien de la ville d'Arras (1839) et de ses alentours.</figcaption>
+				</figure>
+				<p>Ce site est avant tout une porte d'entrée vers un projet plus important, présentant un grand intérêt non seulement pour l'étude de l'Histoire de notre région à une très petite échelle, mais également pour aider les généalogistes dans leurs recherches géographiques, ainsi que pour toutes les personnes souhaitant découvrir le visage de leur territoire à travers l'Histoire.</p>
+				<p>Ce projet repose en effet sur la numérisation et l'indexation du cadastre napoléonien pour le Pas-de-Calais. Ces projets sont actuellement rares en France tant ils sont fastidieux face au nombre de parcelles à traiter, mais en 2024 certains d'entre eux sont en cours et bien avancés, <a href="https://www.data.gouv.fr/fr/datasets/plans-cadastraux-des-immeubles-de-paris-1809-1856/">comme c'est le cas pour la ville de Paris</a>, bien qu'il ne s'agisse pour le moment que de fichiers téléchargeables et non de cartes interactives. La grande difficulté de ce projet est évidemment son échelle, c'est pourquoi nous commencerons par la ville d'Arras et les villages directement à proximité, le dépouillement des matrices cadastrales pour une ville étant très fastidieux, d'autant plus que les archives départementales n'ont numérisé que les plans et non les matrices.</p>
+				<p>L'objectif est, tout comme pour ce site, de présenter une carte interactive pour le cadastre du XIXe siècle, avec une charte graphique proche de celle utilisée ici, où chaque parcelle contiendrait toutes les informations disponibles sur la matrice.</p>
+			</div>
+		</div>
+	</div>
+    {% endblock %}

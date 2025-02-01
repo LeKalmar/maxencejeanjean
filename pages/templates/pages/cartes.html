@@ -1,0 +1,10 @@
+{% extends 'pages/base.html' %}
+{% load static %}
+
+{% block title%}Mes Cartes{%endblock%}
+{% block content %}
+<!-- Bandeau -->
+	<div id="bandeau" align="center"><img class="bandeau" src="{% static 'pages/images/Mes cartes.png' %}"/></div>
+   {% include 'pages/projets.html' %}
+{% endblock %}
+

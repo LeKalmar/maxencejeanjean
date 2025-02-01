@@ -1,0 +1,9 @@
+{% extends 'pages/base.html' %}
+{% load static %}
+
+{% block title%}Généalogie{%endblock%}
+{% block content %}
+<!-- Bandeau -->
+<div id="bandeau" align="center"><img class="bandeau" src="{% static 'pages/images/genealogie-bandeau.png' %}"/></div>
+   {% include 'pages/projets.html' %}
+  {% endblock %}

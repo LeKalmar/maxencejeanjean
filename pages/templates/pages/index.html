@@ -1,0 +1,41 @@
+{% extends 'pages/base.html' %}
+{% load static %}
+
+{% block title%}Maxence Jeanjean{%endblock%}
+{% block style%}<link rel="stylesheet" href="{% static 'pages/css/accueil.css' %}">{%endblock%}
+{% block content %}
+<script src="{% static 'pages/js/slider.js' %}"></script>
+
+<!--Bienvenue-->
+<div id="bienvenue">
+	<!-- Bandeau -->
+	<div id="bandeau" align="center">
+		<img class="bandeau" src="../static/pages/images/Accueil.png"/>
+	</div>
+	<div class="accueil-boite">
+		<div class="accueil-boite-presentation">
+
+		</div>
+		{% if projets_epingles %}
+		<div class="accueil-boite-slider">
+			<div class="slider">
+				<div class="slider-titre">Mes projets principaux</div>
+				{% for projet in projets_epingles %}
+				<div class="slide {% if forloop.first %}active{% endif %}">
+					<div class="slider-projet-titre">{{ projet.titre }}</div>
+					<div class="slider-image-description">
+						<img class="slide-image" src="{{ projet.image.url }}" alt="{{ projet.titre }}"/>
+						<div class="slider-description-lien">
+							<p class="slider-description">{{ projet.description|truncatechars:150 }}</p>
+							<a class="slider-lien" href="{% url 'projet_detail' projet.id %}">...Voir plus</a>
+						</div>
+					</div>
+				</div>
+				{% endfor %}
+			</div>
+		</div>
+		{% endif %}
+	</div>
+</div>
+	{% include 'pages/projets.html' %}	
+{% endblock %}
