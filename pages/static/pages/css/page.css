@@ -87,7 +87,7 @@
 		background-color: rgb(78 75 70);
 	}
 	#bienvenue {
-		background-color: rgba(232, 233, 209, 0.705);
+		background-color: #d8cbb491;
 		margin-right: 10vw;
 		margin-left: 10vw;
 		margin-top: 50px;
@@ -102,7 +102,7 @@
 
 /* AUTRES */
 	.titre-gauche {
-		background: #e8e9d1;
+		background: #D8CBB4;
 		display: block;
 		padding: 50px;
 		margin: 0px;
@@ -114,7 +114,7 @@
 		max-width: 50%;
 	}
 	#gauche {
-		background: #e8e9d1da;
+		background: #D8CBB4;
 		padding-bottom: 5vh;
 		padding-top: 3vh;
 		padding-left: 5vw;

@@ -1,18 +1,14 @@
 .bandeau-projet {
-    padding-bottom: 5vh;
-    padding-top: 3vh;
-    padding-left: 5vw;
-    padding-right: 5vw;
+    padding: 5vw;
     border-bottom: solid 3px;
-    display: flex;
 }
 
 .bandeau-projet.blanc{
-    background: #ffffffe7;
+    background: #d8cbb491;
 }
 
 .bandeau-projet.jaune{
-    background: #e8e9d1da;
+    background: #D8CBB4;
 }
 
 .bandeau-projet-image {
@@ -21,37 +17,43 @@
     border: solid 2px;
 }
 
+.boite-bandeau-projet {
+    display: flex;
+    background-color: #D8CBB4;
+    border: solid 5px #3F373C;
+    border-radius: 15px;
+}
+
 .boite-bandeau-projet-texte {
-    border-top-left-radius: 5px;
-    border-bottom-left-radius: 5px;
     width: 100%;
-    background-color: rgb(232 233 209);
 }
 
 .projet-redirection {
     text-align: right;
     padding-right : 15px;
+    padding: 5px;
+    border-radius: 2px;
 }
 
 .boite-bandeau-projet-image {
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
     display: flex;
     align-content: center;
     align-items: center;
-    background-color: rgb(232 233 209);
 }
 
 .bandeau-projet-titre {
-    background-color: rgb(78 75 70);
+    font-family: "Quintessential", serif;
+    font-weight: 500;
+    font-style: normal;    
+    background-color: #3F373C;
     border-radius: 5px;
     font-size: 15px;
     display: flex;
 }
 
 .bandeau-projet-titre-type {
-    background-color: rgb(232 233 209);
-    color: rgb(78 75 70);
+    background-color: #D8CBB4;
+    color: #3F373C;
     border-radius: 5px;
     margin: 15px;
     padding-left: 15px;
@@ -60,7 +62,7 @@
     padding-bottom: 5px;
 } 
 .bandeau-projet-titre-titre {
-    color: rgb(232 233 209);
+    color: #D8CBB4;
 }
 
 .bandeau-projet-description {
@@ -68,7 +70,7 @@
 }
 
 .bandeau-projet-image {
-    background-color: rgb(78 75 70);
+    background-color: #3F373C;
     padding: 15px;
 }
 
@@ -76,7 +78,7 @@
     display: flex;
     align-items: center;
     border-bottom: solid 5px;
-    background-color: rgb(232 233 209); 
+    background-color: #D8CBB4; 
 }
 
 .base-top-logo {
@@ -87,7 +89,7 @@
 .base-top-boutons {
     display: flex;
     gap: 20px;
-    background-color: rgb(78 75 70);
+    background-color: #3F373C;
     margin-left: 50px;
     border-radius: 5px;
     font-family: 'Trebuchet MS';
@@ -100,16 +102,16 @@
     transform: translateY(-50%);  /* Centre verticalement */
     width: 5px;  /* Épaisseur de la ligne */
     height: 60%;  /* Hauteur de la ligne */
-    background-color: rgb(232 233 209);  /* Couleur de la ligne */
+    background-color: #D8CBB4;  /* Couleur de la ligne */
 }
 .base-top-boutons a {
-    color: rgb(232 233 209);
+    color: #D8CBB4;
 }
 .base-top-boutons a:visited {
-    color: rgb(232 233 209);
+    color: #D8CBB4;
 }
 .base-top-boutons a:hover {
-    color: rgb(232 233 209);
+    color: #D8CBB4;
 }
 .base-top-bouton-individuel {
     width: 120px;

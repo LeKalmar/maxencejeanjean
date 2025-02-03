@@ -12,7 +12,7 @@
     display: flex;
     justify-content: center;
     padding: 10px;
-    background-color: rgb(78 75 70);
+    background-color: #3F373C;
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
 }
@@ -27,7 +27,7 @@
 
 .slider {
     position: relative;
-    background-color: rgb(232 233 209);
+    background-color: #D8CBB4;
     padding: 15px;
     border-radius: 5px;
 
@@ -61,7 +61,7 @@
     justify-content: center;
     font-size: 2em;
     font-weight: bold;
-    color: rgb(78 75 70);
+    color: #3F373C;
 
 }
 
@@ -88,9 +88,9 @@
 .slider-projet-titre {
     display: flex;
     justify-content: center;
-    background-color: rgb(78 75 70);
+    background-color: #3F373C;
     padding: 15px;
     font-size: 15px;
-    color: rgb(232 233 209);
+    color: #D8CBB4;
     font-size: 25px;
 }
