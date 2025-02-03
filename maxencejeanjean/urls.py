@@ -23,7 +23,7 @@ from django.contrib.auth import views as auth_views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('pages.urls')),
-    path('wiki/', include('wikiarras.urls')),
+    path('wiki/', include('wikiarras.urls', namespace='wikiarras')),
 ]
 
 
