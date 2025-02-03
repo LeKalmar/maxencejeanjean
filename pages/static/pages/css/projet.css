@@ -1,14 +1,11 @@
 .bandeau-projet {
-    padding: 5vw;
+    padding-left: 5vw;
+    padding-right: 5vw;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    flex: 1;
     border-bottom: solid 3px;
-}
-
-.bandeau-projet.blanc{
     background: #d8cbb491;
-}
-
-.bandeau-projet.jaune{
-    background: #D8CBB4;
 }
 
 .bandeau-projet-image {
@@ -63,6 +60,7 @@
 } 
 .bandeau-projet-titre-titre {
     color: #D8CBB4;
+    margin-right: 15px;
 }
 
 .bandeau-projet-description {

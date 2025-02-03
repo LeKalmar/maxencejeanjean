@@ -1,11 +1,9 @@
 <!-- Corps de page -->
-<div id="description">
+<div class="description">
     <div class="titre-gauche"><center>Mes projets</center></div>
-</div>
     {% for projet in projets %}
-    <div id="description">
         <!--1er paragraphe-->
-        <div class="bandeau-projet {% cycle 'blanc' 'jaune' %}" align="center">
+        <div class="bandeau-projet" align="center">
             <div class="boite-bandeau-projet">
                 <div class="boite-bandeau-projet-texte">
                     <div class="bandeau-projet-titre">
@@ -13,24 +11,29 @@
                         <h1 class="bandeau-projet-titre-titre">{{ projet.titre }}</h1>
                     </div>
                     <div>
-                        <p class="bandeau-projet-description">
-                            {{ projet.description|safe }}
-                        </p>
-                        <p class="projet-redirection">
-                            <a href="{% url 'projet_detail' projet.id %}">Voir plus...</a>
+                        <div class="bandeau-projet-description">
+                            <p>{{ projet.description|safe }}</p>
+                        </div>
+                        <div class="projet-redirection">
+                            <a class="slider-lien" href="{% url 'projet_detail' projet.id %}">Voir plus...</a>
                             - {{ projet.date_creation|date:"d/m/Y" }}
-                        </p>
+                        </div>
                     </div>
                 </div>
                 <div class="boite-bandeau-projet-image">
                     <figure>
                         <img class="bandeau-projet-image" src="{{ projet.image.url }}" alt="{{ projet.titre }}">
+                        {% if projet.image_caption %}
                         <figcaption class="bandeau-projet-image-caption" class="small">{{ projet.image_caption }}.</figcaption>
+                        {% endif %}
                     </figure>
                 </div>
             </div>
         </div>
-    </div>
-{% empty %}
-    <p>Aucun projet disponible.</p>
-{% endfor %}
+    {% empty %}
+        <!--1er paragraphe-->
+        <div class="bandeau-projet" align="center">
+                Pas de projet disponible...
+        </div>
+    {% endfor %}
+</div>

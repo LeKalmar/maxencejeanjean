@@ -25,8 +25,8 @@
 					<div class="slider-projet-titre">{{ projet.titre }}</div>
 					<div class="slider-image-description">
 						<img class="slide-image" src="{{ projet.image.url }}" alt="{{ projet.titre }}"/>
+						<p class="slider-description">{{ projet.description|truncatechars:400 }}</p>
 						<div class="slider-description-lien">
-							<p class="slider-description">{{ projet.description|truncatechars:150 }}</p>
 							<a class="slider-lien" href="{% url 'projet_detail' projet.id %}">...Voir plus</a>
 						</div>
 					</div>

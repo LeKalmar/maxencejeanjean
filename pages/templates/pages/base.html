@@ -32,12 +32,34 @@
             <a class="base-top-bouton-individuel" href="{% url 'apropos' %}">A propos</a>
         </div>
     </div>
-    {% block content %}
-    {% endblock %}
-	<div id="about">
-		<table class="firsttab">
-			<div><p><a href="https://fr.wikipedia.org/wiki/Utilisateur:Maxence_Jeanjean" target="_blank">Mon wikipédia</a></p></div>
-		</table>
+    <div class="content">
+        {% block content %}
+        {% endblock %}
+    </div>
+	<div class="about">
+        <div class="footer-about-me">
+            <div class="footer-row">
+                <img class="footer-logo" src="{% static 'pages/svg/icons/user-svgrepo-com.svg' %}"/>
+                <a href="{% url 'apropos' %}" target="_blank">A propos de moi</a>
+            </div>
+			<div class="footer-row">
+                <img class="footer-logo" src="{% static 'pages/svg/icons/earth-svgrepo-com.svg' %}"/>
+                <a href="https://fr.wikipedia.org/wiki/Utilisateur:Maxence_Jeanjean" target="_blank">Mon wikipédia</a>
+            </div>
+        </div>
+        <div class="footer-social-networks">
+            <div  class="footer-row">
+                <img class="footer-logo" src="{% static 'pages/svg/icons/linkedin-svgrepo-com.svg' %}"/>
+                <a href="https://www.linkedin.com/in/maxence-jeanjean-955343174/" target="_blank">Mon LinkedIn</a>
+            </div>
+            <div  class="footer-row">
+                <img class="footer-logo" src="{% static 'pages/svg/icons/twitter-svgrepo-com.svg' %}"/>
+                <a href="https://fr.wikipedia.org/wiki/Utilisateur:Maxence_Jeanjean" target="_blank">Mon Twitter</a>
+            </div>
+            <div  class="footer-row">
+                <img class="footer-logo" src="{% static 'pages/svg/icons/facebook-svgrepo-com.svg' %}"/>
+                <a href="https://www.facebook.com/MaxenceJeanjean2/" target="_blank">Mon Facebook</a>
+            </div>
 	</div>
 </body>
 </html>
