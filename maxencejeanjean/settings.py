@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/5.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
-
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -117,9 +117,18 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
+# URL où les fichiers statiques seront servis
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [BASE_DIR / "static"]
-STATIC_ROOT = BASE_DIR / "staticfiles"
+
+# Dossier principal où Django va collecter tous les fichiers statiques
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+# Dossiers contenant des fichiers statiques dans différentes apps
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),  # Si tu as un dossier global
+    os.path.join(BASE_DIR, 'wikiarras/static'),  # Pour ton app wikiarras
+    os.path.join(BASE_DIR, 'pages/static'),  # Pour ton app pages
+]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
