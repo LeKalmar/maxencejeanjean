@@ -1,20 +1,23 @@
 .retour-site-logo {
-    width: 75px;
+    width: 50px;
     height: 100%;
-    border-right: 5px;
+    border-radius: 3px;
 }
 .retour-site-bouton {
     display: flex;
     align-items: center;
-    width: 120px;
+    background-color:#3F373C;
+    gap: 10px;
     font-size: 20px;
-    margin-left: 50px;
+    margin-left: 10px;
     border-radius: 5px;
+    padding: 5px;
+    padding-right: 15px;
 } 
 .retour-site-bouton-texte {
-    padding-top: 15px;
-    padding-bottom: 15px;
+
     font-family: 'Trebuchet MS';
+    color: #D8CBB4;
 }
 .retour-site-bouton-texte a {
     color: #D8CBB4;

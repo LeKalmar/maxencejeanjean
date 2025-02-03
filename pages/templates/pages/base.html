@@ -13,11 +13,16 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Quintessential&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'pages/css/projet.css' %}">
+    <link rel="stylesheet" href="{% static 'wikiarras/css/wiki-accueil.css' %}">
     {% block style%}{%endblock%}
 </head>
 <body>
     <div id="base-top-bandeau">
         <img class="base-top-logo" src="{% static 'pages/images/logo/MJ-logo.png' %}"/>
+        <div class="retour-site-bouton" align="center">
+            <img class="retour-site-logo" src="{% static 'wikiarras/images/logo/logo-wikiarras.jpg' %}"/>
+            <a class="retour-site-bouton-texte" href="{% url 'wikiarras:accueil-wiki' %}">Wikiarras</a>
+        </div>
         <div class="base-top-boutons" align="center">
             <a class="base-top-bouton-individuel" href="{% url 'index' %}">Accueil</a>
             <a class="base-top-bouton-individuel" href="{% url 'mescartes' %}">Cartographie</a>

@@ -36,20 +36,20 @@
 		font-family: "Lato", sans-serif;		
 	}
 	p > a:link {
-		color: #518b96;
+		color: #D8CBB4;
 		text-decoration: underline;
 	}
 	p > a:visited {
-		color: #aa5fa6;
+		color: #D8CBB4;
 		text-decoration: none;
 	}
 	a:link {
-		color: #3d3e32;
+		color: #D8CBB4;
 		text-decoration: none;
 	}
 
 	a:visited {
-		color: #3d3e32;
+		color: #D8CBB4;
 		text-decoration: none;
 	}
 	
