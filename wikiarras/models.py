@@ -1,20 +1,16 @@
 from django.db import models
 from django.contrib.auth.models import User
-from markdownx.models import MarkdownxField
-from markdownx.utils import markdownify
+from tinymce.models import HTMLField  # Remplacer RichTextField par HTMLField
 
-#PAGES
-class Page(models.Model): 
+# PAGES
+class Page(models.Model):
     title = models.CharField(max_length=200)
-    content = MarkdownxField()  # Remplace TextField par MarkdownxField !
+    content = HTMLField()  # Utiliser HTMLField de TinyMCE
     created_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='created_pages')
     last_modified_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='modified_pages')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    
-    def formatted_markdown(self):
-        return markdownify(self.content)
-    
+
     def __str__(self):
         return self.title
 

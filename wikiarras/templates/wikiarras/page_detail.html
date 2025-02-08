@@ -30,7 +30,7 @@
     </div>
     {% endif %}
     <h1 class="article-titre">{{ page.title }}</h1>
-    <div class="article-content">{{ page.formatted_markdown|safe }}</div>
+    <div class="article-content">{{ page.content|safe }}</div>
     <div class="article-metadata">
         <p class="article-metadata-text">Créé par {{ page.created_by.username }} le {{ page.created_at|date:"d F Y à H:i" }}</p>
         <p class="article-metadata-text">Dernière modification par {{ page.last_modified_by.username }} le {{ page.updated_at|date:"d F Y à H:i" }}</p>

@@ -3,7 +3,7 @@ from .models import Page
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from .models import Infobox, InfoboxType
-from markdownx.models import MarkdownxField
+from tinymce.widgets import TinyMCE  # Importer TinyMCEWidget
 
 #COMPTE
 class CustomUserCreationForm(UserCreationForm):
@@ -18,7 +18,7 @@ class CustomUserCreationForm(UserCreationForm):
             user.save()
         return user
     
-#PAGE
+# PAGE
 class PageForm(forms.ModelForm):
     class Meta:
         model = Page
@@ -29,7 +29,7 @@ class PageForm(forms.ModelForm):
         }
         widgets = {
             'title': forms.TextInput(attrs={'placeholder': 'Entrez le titre ici...', 'class': 'article-title-input'}),
-            'content': forms.Textarea(attrs={'placeholder': 'Écrivez ici...', 'class': 'markdownx-editor'}),
+            'content': TinyMCE(attrs={'placeholder': 'Écrivez ici...', 'class': 'tinymce-editor'}),  # Utiliser TinyMCEWidget
         }
 
 #INFOBOX

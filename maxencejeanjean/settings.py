@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'markdownx',
+    'tinymce',
     'pages',
     'wikiarras',
 ]
@@ -143,3 +143,23 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_ROOT = BASE_DIR / 'media'
 MARKDOWNX_MEDIA_PATH = 'uploads/markdownx/'
+
+TINYMCE_DEFAULT_CONFIG = {
+    'height': 300,  # Hauteur de l'éditeur
+    'width': '100%',  # Largeur de l'éditeur
+    'cleanup_on_startup': True,  # Nettoyer le contenu au démarrage
+    'custom_undo_redo_levels': 20,  # Niveaux d'annulation/rétablissement
+    'selector': 'textarea',  # Appliquer TinyMCE à tous les textarea
+    'plugins': '''
+        textcolor save link image media preview codesample contextmenu
+        table code lists fullscreen insertdatetime nonbreaking
+        contextmenu directionality searchreplace wordcount visualblocks
+        visualchars code fullscreen autolink lists charmap print hr
+        anchor pagebreak
+    ''',
+    'toolbar': '''
+        undo redo | formatselect | bold italic backcolor |
+        alignleft aligncenter alignright alignjustify |
+        bullist numlist outdent indent | removeformat | help
+    ''',
+}

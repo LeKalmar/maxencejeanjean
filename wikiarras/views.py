@@ -2,7 +2,6 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from django.contrib.auth.models import User
-from markdown import markdown
 from .models import Page, PageHistory, InfoboxType, Infobox
 from .forms import PageForm, InfoboxForm, CustomUserCreationForm
 import random
@@ -13,7 +12,7 @@ def wiki(request):
 
 def page_detail(request, page_id):
     page = get_object_or_404(Page, id=page_id)
-    formatted_content = markdown(page.content)
+    formatted_content = page.content
     infobox = page.infoboxes.first()  # Récupère la première infobox associée à la page
 
     # Formulaire pour créer ou éditer une infobox
