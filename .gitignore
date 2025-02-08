@@ -1,4 +1,5 @@
 # Ignorer les fichiers compilés Python
+myenv
 __pycache__/
 *.pyc
 *.pyo
