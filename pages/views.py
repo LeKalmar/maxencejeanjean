@@ -31,3 +31,33 @@ def projet_detail(request, projet_id):
         return render(request, f'pages/{projet.lien}')
     else:
         return render(request, 'pages/index.html')  # Redirige vers la page d'accueil
+    
+
+#Légende de la carte Desailly
+# views.py
+def desailly_view(request):
+    legend_data = [
+        {
+            "title": "Clergé séculier",
+            "items": [
+                {"icon": "cathedrale.png", "label": "Cathédrale"},
+                {"icon": "eglise-paroissiale.png", "label": "Église paroissiale"},
+                {"icon": "Eglise.png", "label": "Église"},
+                {"icon": "Paroisse.png", "label": "Paroisse"},
+                {"icon": "bat-religieux.png", "label": "Bâtiment religieux"},
+                {"icon": "cimetiere.png", "label": "Cimetière"},
+            ]
+        },
+        {
+            "title": "Clergé régulier",
+            "items": [
+                {"icon": "abbaye-saint-vaast.png", "label": "Abbaye Saint-Vaast"},
+                {"icon": "Abbaye.png", "label": "Abbaye"},
+                {"icon": "refuge-abbaye.png", "label": "Refuge d'Abbaye"},
+                {"icon": "Couvent.png", "label": "Couvent"},
+                {"icon": "Couvent-point.png", "label": "Bâtiment conventuel"},
+            ]
+        },
+        # Ajoutez d'autres catégories ici
+    ]
+    return render(request, 'pages/projets/desailly.html', {'legend_data': legend_data})
