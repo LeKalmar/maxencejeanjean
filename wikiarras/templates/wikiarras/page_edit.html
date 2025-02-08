@@ -1,0 +1,16 @@
+{% extends 'wikiarras/base_wiki.html' %}
+
+{% block content%}
+<h1>Modifier {{ page.title }}</h1>
+<form class="article-form" method="post">
+    {% csrf_token %}
+    <div class="article-title-container">
+        {{ form.title }}
+    </div>
+    <div class="article-content-container">
+        {{ form.content.label_tag }}
+        {{ form.content }}
+    </div>
+    <button class="article-submit" type="submit">Enregistrer les modifications</button>
+</form>
+{% endblock %}

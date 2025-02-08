@@ -1,0 +1,27 @@
+{% extends 'wikiarras/base_wiki.html' %}  <!-- Remplacez 'base.html' par votre template de base -->
+
+{% block content %}
+<h1>Créer un nouvel article</h1>
+<form class="article-form" method="post" action="{% url 'wikiarras:create_page' %}" novalidate>
+    {% csrf_token %}
+    <div class="article-title-container">
+        {{ form.title }}
+    </div>
+    <div class="article-content-container">
+        {{ form.content.label_tag }}
+        {{ form.content }}
+    </div>
+    <button class="article-submit" type="submit">Créer la page</button>
+</form>
+{% if form.errors %}
+    <div class="form-errors">
+        <ul>
+            {% for field in form %}
+                {% for error in field.errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+            {% endfor %}
+        </ul>
+    </div>
+{% endif %}
+{% endblock %}

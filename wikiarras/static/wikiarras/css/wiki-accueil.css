@@ -1,30 +1,175 @@
-.retour-site-logo {
-    width: 50px;
-    height: 100%;
-    border-radius: 3px;
-}
 .retour-site-bouton {
     display: flex;
     align-items: center;
-    background-color:#3F373C;
+    justify-content: flex-start;
+    background-color: #3F373C;
     gap: 10px;
     font-size: 20px;
     margin-left: 10px;
     border-radius: 5px;
-    padding: 5px;
-    padding-right: 15px;
-} 
-.retour-site-bouton-texte {
+    position: relative;
+    overflow: hidden;
+    width: fit-content; /* Ajuste la largeur pour contenir le contenu */
+}
 
+.retour-site-logo {
+    width: 50px;
+    height: 50px; /* Ajustez la hauteur selon vos besoins */
+    border: solid 5px #3F373C;
+    border-radius: 3px;
+    background-color: #D8CBB4;
+    z-index: 1; /* Assure que le logo est au-dessus du texte */
+}
+
+.retour-site-bouton-texte-container {
+    display: none;
+    background-color: #3F373C; /* Fond du texte */
+    padding: 5px 15px;
+    border-radius: 5px;
+    overflow: hidden;
+    width: 0; /* Largeur initiale */
+    transition: width 0.3s ease-in-out;
+}
+
+.retour-site-bouton-texte {
     font-family: 'Trebuchet MS';
     color: #D8CBB4;
+    white-space: nowrap;
+    transition: transform 0.3s ease-in-out;
+    transform: translateX(-100%); /* Initialement caché derrière le logo */
 }
+
+.retour-site-bouton:hover .retour-site-bouton-texte-container {
+    width: 150px; /* Largeur finale, ajustez selon la longueur du texte */
+    display: flex;
+    align-items: center;
+}
+
+.retour-site-bouton:hover .retour-site-bouton-texte {
+    transform: translateX(0); /* Déplace le texte à sa position finale */
+}
+
 .retour-site-bouton-texte a {
     color: #D8CBB4;
 }
+
 .retour-site-bouton-texte a:visited {
     color: #D8CBB4;
 }
+
 .retour-site-bouton-texte a:hover {
     color: #D8CBB4;
+}
+/* CONTENU PRINCIPAL */
+.content.wiki-accueil {
+    flex-direction: row;
+}
+.content.wiki-accueil a {
+    color: #3B727C;
+}
+.content.wiki-accueil a:visited {
+    color: #3B727C;
+}
+.content.wiki-accueil a:hover {
+    color: #3B727C;
+}
+.content.wiki-accueil a:active {
+    color: #B05F66
+}
+
+/* BANDEAUX COTE*/
+.page-bandeau {
+    display: flex;
+    flex-direction: column;
+    background-color:#D8CBB4;
+    border: solid #3F373C 5px;
+    border-radius: 5px;
+    margin-top: 25px;
+    margin-left: 5vw;
+    width: 150px;
+    margin-right: 5vw;
+    margin-bottom: 25px;
+    max-height: 50vh;
+}
+.page-bandeau.droite {
+    margin-left: 2vw;
+    margin-right: 8vw;
+}
+.page-bandeau.gauche {
+    margin-left: 8vw;
+    margin-right: 2vw;
+}
+.page-bandeau-logo {
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-left: auto; /* Centre l'image horizontalement */
+    margin-right: auto; /* Centre l'image horizontalement */
+    width: 100px;
+}
+.page-bandeau-navigation {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}
+.page-bandeau-navigation-titre {
+    border-bottom: solid 1px;
+}
+.page-bandeau-bouton {
+    padding-top: 10px;
+}
+.page-main {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    flex: 1;
+    padding: 15px;
+    line-height: 1.3;
+    background-color: #D8CBB4;
+}
+/* BARRE DE RECHERCHE */
+.wiki-search-button {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    margin-left: 10px;
+    margin-right: 10px;
+    border: solid 2px;
+    border-radius: 5px;
+}
+#wiki-search-button-retour-accueil {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.wiki-search-button-accueil {
+    transform: translateX(-8px);
+    color:#3F373C;
+}
+.wiki-search-button-accueil:visited {
+    color:#3F373C;
+}
+.wiki-search-button-logo {
+    width: 41px;
+    object-fit: contain;
+}
+.wiki-search-button-input {
+    color: #3F373C;
+    width: 100%;
+    border: none;
+    border-left: solid 2px;
+    background-color: transparent;
+    padding: 10px;
+    font-size: 18px;
+}
+.wiki-search-button-submit {
+    margin: 3px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;;
+    background-color: #3F373C;
+    font-size: 18px;
 }

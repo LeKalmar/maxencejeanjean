@@ -1,10 +1,11 @@
 {% load static %}
+<!DOCTYPE html>
 <html>
 <head>
     <title>{% block title%}{%endblock%}</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="{% static 'pages/images/logo/MJ-logo.png' %}" type="image/icon type">
+    <link rel="icon" href="{% static 'wikiarras/images/logo/logo-wikiarras.jpg' %}" type="image/icon type">
     <link rel="stylesheet" href="{% static 'pages/css/page.css' %}">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans">
@@ -13,21 +14,95 @@
     <link href="https://fonts.googleapis.com/css2?family=Quintessential&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'pages/css/projet.css' %}">
     <link rel="stylesheet" href="{% static 'wikiarras/css/wiki-accueil.css' %}">
+    <link rel="stylesheet" href="{% static 'wikiarras/css/wiki-article.css' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/easymde/dist/easymde.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/easymde/dist/easymde.min.js"></script>
     {% block style%}{%endblock%}
-</head>
-<body>
+    {% block extrahead %}{% endblock %}
     <div id="base-top-bandeau">
         <div class="retour-site-bouton" align="center">
-            <img class="retour-site-logo" src="{% static 'pages/images/logo/MJ-logo.png' %}"/>
-            <a class="retour-site-bouton-texte" href="{% url 'index' %}">Retour au site</a>
+            <img class="retour-site-logo" src="{% static 'pages/images/logo/MJ-logo.png' %}" alt="Logo"/>
+            <div class="retour-site-bouton-texte-container">
+                <a class="retour-site-bouton-texte" href="{% url 'index' %}">Retour au site</a>
+            </div>
         </div>
+        <form class="wiki-search-button" method="GET" action="{% url 'wikiarras:search_results' %}" id="search-form">
+            <a href="{% url 'wikiarras:accueil-wiki' %}" id="wiki-search-button-retour-accueil">
+                <img class="wiki-search-button-logo" src="{% static 'wikiarras/images/logo/logo-wikiarras.jpg' %}"/>
+                <div class="wiki-search-button-accueil"> ikiArras</div>
+            </a>
+            <input type="text" class="wiki-search-button-input" name="q" placeholder="Rechercher un article..." autocomplete="off" value="{{ query|default_if_none:'' }}">
+            <button class="wiki-search-button-submit" type="submit">🔍</button>
+        </form>
+        <div id="wiki-search-results"><script src="{% static 'wikiarras/js/ajax-search.js' %}"></script></div> <!-- Zone pour afficher les résultats en temps réel -->
+        <nav>
+            {% if user.is_authenticated %}
+                <p>Bienvenue, {{ user.username }} ! 
+                    <form action="{% url 'wikiarras:deconnection' %}" method="post">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-link">Déconnexion</button>
+                    </form>
+                </p>
+            {% else %}
+                <p><a href="{% url 'wikiarras:connexion' %}">Connexion</a> | <a href="{% url 'wikiarras:inscription' %}">Inscription</a></p>
+            {% endif %}
+        </nav>
     </div>
-    {% block content %}
-    {% endblock %}
-	<div id="about">
-		<table class="firsttab">
-			<div><p><a href="https://fr.wikipedia.org/wiki/Utilisateur:Maxence_Jeanjean" target="_blank">Mon wikipédia</a></p></div>
-		</table>
+</head>
+<body>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var easyMDE = new EasyMDE({ element: document.getElementById("id_content") });
+    
+            document.querySelector("form").addEventListener("submit", function() {
+                document.getElementById("id_content").value = easyMDE.value(); // Copie le contenu dans le textarea avant envoi
+            });
+        });
+    </script>
+
+    <div class="content wiki-accueil">
+        <div class="page-bandeau gauche">
+            <img class="page-bandeau-logo" src="{% static 'wikiarras/images/logo/logo-wikiarras.jpg' %}"/>
+            <div class="page-bandeau-navigation">
+                <div class="page-bandeau-navigation-titre">Navigation</div>
+                <a class="page-bandeau-bouton" href="{% url 'wikiarras:accueil-wiki' %}" class="btn btn-primary">Accueil</a>
+                <a class="page-bandeau-bouton" href="{{ random_article_url }}" class="btn btn-primary">Article au hasard</a>
+            </div>
+            <div class="page-bandeau-navigation">
+                <div class="page-bandeau-navigation-titre">Contribuer</div>
+                <a class="page-bandeau-bouton" href="{% url 'wikiarras:create_page' %}" class="btn btn-primary">Créer une page</a>
+            </div>
+        </div>
+        <div class="page-main">
+            {% block content %}
+            {% endblock %}
+        </div>
+        <div class="page-bandeau droite"></div>
+    </div>
+	<div class="about">
+        <div class="footer-about-me">
+            <div class="footer-row">
+                <img class="footer-logo" src="{% static 'pages/svg/icons/user-svgrepo-com.svg' %}"/>
+                <a href="{% url 'apropos' %}" target="_blank">A propos de moi</a>
+            </div>
+			<div class="footer-row">
+                <img class="footer-logo" src="{% static 'pages/svg/icons/earth-svgrepo-com.svg' %}"/>
+                <a href="https://fr.wikipedia.org/wiki/Utilisateur:Maxence_Jeanjean" target="_blank">Mon wikipédia</a>
+            </div>
+        </div>
+        <div class="footer-social-networks">
+            <div  class="footer-row">
+                <img class="footer-logo" src="{% static 'pages/svg/icons/linkedin-svgrepo-com.svg' %}"/>
+                <a href="https://www.linkedin.com/in/maxence-jeanjean-955343174/" target="_blank">Mon LinkedIn</a>
+            </div>
+            <div  class="footer-row">
+                <img class="footer-logo" src="{% static 'pages/svg/icons/twitter-svgrepo-com.svg' %}"/>
+                <a href="https://x.com/Maxence_jj/" target="_blank">Mon Twitter</a>
+            </div>
+            <div  class="footer-row">
+                <img class="footer-logo" src="{% static 'pages/svg/icons/facebook-svgrepo-com.svg' %}"/>
+                <a href="https://www.facebook.com/MaxenceJeanjean2/" target="_blank">Mon Facebook</a>
+            </div>
 	</div>
 </body>
 </html>

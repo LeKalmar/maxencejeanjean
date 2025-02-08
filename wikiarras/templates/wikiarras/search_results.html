@@ -1,0 +1,19 @@
+{% extends 'wikiarras/base_wiki.html' %}
+{% load static %}
+
+{% block extrahead %}
+    <link rel="stylesheet" href="{% static 'wikiarras/css/search-results.css' %}">
+{% endblock %}
+{% block content%}
+    <h1>Résultats de la recherche pour : "{{ query }}"</h1>
+    {% if pages %}
+            {% for page in pages %}
+            <div class="search-results">
+                <h3 class="search-results-title"><a href="{% url 'wikiarras:page_detail' page.id %}">{{ page.title }}</a></h3>
+                <div class="search-results-content">{{ page.content|truncatechars:350|safe }}</div>
+            </div>
+            {% endfor %}
+    {% else %}
+        <p>Aucun résultat trouvé.</p>
+    {% endif %}
+{% endblock %}

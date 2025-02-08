@@ -1,0 +1,9 @@
+h3 {
+    margin-top: 0px;
+}
+.search-results {
+    margin: 10px;
+    border: solid 5px #3F373C;
+    border-radius: 10px;
+    padding: 10px;  
+}

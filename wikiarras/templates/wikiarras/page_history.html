@@ -1,0 +1,19 @@
+{% extends 'wikiarras/base_wiki.html' %}
+{% block content %}
+    <h1>Historique des modifications de "{{ page.title }}"</h1>
+    <a href="{% url 'wikiarras:page_detail' page.id %}" class="btn btn-primary">Retour à l'article</a>
+    <ul>
+        {% for entry in history %}
+            <li>
+                <strong>{{ entry.modified_at }}</strong> par {{ entry.modified_by.username }}
+                {% if entry.char_diff > 0 %}
+                    <span style="color: green;">+{{ entry.char_diff }}</span>
+                {% elif entry.char_diff < 0 %}
+                    <span style="color: red;">{{ entry.char_diff }}</span>
+                {% else %}
+                    <span style="color: gray;">0</span>
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

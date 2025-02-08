@@ -57,11 +57,10 @@
 	
 	a:hover {
 		color: #000000;
-		font-weight: bolder;
 	}
 
 	a:active {
-		color: blue;
+		color: rgb(0, 0, 0);
 		text-decoration: none;
 	}
 	#bandeau {
@@ -101,47 +100,29 @@
 		font-family: 'Trebuchet MS';
 	}
 	#content {}
+/* Style de la barre de défilement */
+::-webkit-scrollbar {
+    width: 12px; /* Largeur de la barre de défilement */
+}
 
+/* Piste de la barre de défilement (arrière-plan) */
+::-webkit-scrollbar-track {
+    background: #D8CBB4;
+    border-radius: 10px;
+}
+
+/* Curseur de la barre de défilement */
+::-webkit-scrollbar-thumb {
+    background: #3F373C;
+    border-radius: 10px;
+}
+
+/* Curseur de la barre de défilement au survol */
+::-webkit-scrollbar-thumb:hover {
+    background: #292624;
+}
 /* AUTRES */
-	.titre-gauche {
-		background: #D8CBB4;
-		display: block;
-		padding: 50px;
-		margin: 0px;
-		border-top: solid 5px;
-		border-bottom: solid 5px;	
-		font-size: 50px;
-	}
-	#boite-texte {
-		max-width: 50%;
-	}
-	#gauche {
-		background: #D8CBB4;
-		padding-bottom: 5vh;
-		padding-top: 3vh;
-		padding-left: 5vw;
-		padding-right: 5vw;
-	}
-	#gauche-texte {
-		margin-left: 1vw;
-		margin-right: 1vw;
-	}
-	#droite-texte {
-		margin-right: 1vw;
-		margin-left: 1vw;
-	}
-	#droite {
-		background: #ffffffe7;
-		padding-bottom: 5vh;
-		padding-top: 5vh;
-		padding-left: 5vw;
-		padding-right: 5vw;
-		text-align: justify;
-		text-justify: inter-word;
-	}
-	#droite-texte-div {
-		max-width: 50%;
-	}
+
 	#Glossaire {
 		background: #ffffffe7;		
 	}
@@ -160,14 +141,6 @@
 		width: 95%;
 		height: 95%;
 		transition: height 0.3s, width 0.3s;
-	}
-	#légende-ligne {
-		display: flex;
-		align-items: center;
-		border-bottom: 1px solid #ddd;
-		min-height: 2.5vw;
-		padding-left: 1vw;
-		padding-right: 1vw;
 	}
 	.layer-control-titre {
 		text-indent: 0px;

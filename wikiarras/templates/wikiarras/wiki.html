@@ -1,4 +1,14 @@
 {% extends 'wikiarras/base_wiki.html' %}
+{% load static%}
 {% block content %}
-<p>test</p>
+    <div class="page-main">
+        <h1>Bienvenue sur Wikiarras !</h1>
+        <p>Ce projet a pour vocation de créer une succursale de Wikipédia, à la manière de WikiPasdeCalais, dédiée entièrement à l'Histoire d'Arras et de ses alentours proches.</p>
+        <h3>Politique quant aux comptes</h3>
+        <p>La création et l'édition d'article est réservée aux membres du site. L'inscription est gratuite mais fera l'objet d'une vérification, et pourra être révoquée pour tout comportement inapproprié sur le wiki. Cette inscription a pour vocation de garantir la qualité des articles que vous trouverez sur le site, empêcher des interventions anonyme sur des articles plus sensibles, et de créer une communauté de personnes intéressées par l'Histoire d'Arras et son enseignement ! Soyez libre de créer des pages, ajouter des médias, discuter sur chacun des articles pour apporter des améliorations à ce projet avant tout communautaire.</p>
+        <h3>Comment contribuer ?</h3>
+        <p>Comme précisé précédemment, la création d'un compte est nécessaire pour pouvoir créer et éditer des articles sur Wikiarras. Avant de créer une page, vérifiez bien qu'elle n'existe pas déjà ! Vous avez pour cela la possibilité de chercher les articles disponibles sur Wikiarras dans la barre de recherche en haut du site. Si l'article que vous souhaitez ajouter n'existe pas, alors vous pouvez cliquer ici : <a href="{% url 'wikiarras:create_page' %}" class="btn btn-primary">Créer un article</a>, bouton qui se trouve également dans le bandeau à gauche de votre écran sur toutes les pages du wiki.</p>
+        <p>Lorsque vous vous trouvez sur une page existante, vous trouverez un bouton pour éditer la page. Vos modifications sont enregistrées dans un historique, permettant à tous de vérifier vos informations, ainsi que d'éventuels comportement étranges sur les pages du wiki.</p>
+        <p>Si vous ne savez pas comment vous y prendre ou que vous avez des idées de formulation différente sur une page qui ne nécessite pas forcément de modifications dans l'immédiat ? Vous pouvez, sur chaque page, trouver un bouton "discussion" qui permet de laisser un message sur la page pour permettre aux autres de voir et d'éventuellement traiter votre demande.</p>
+    </div>
 {% endblock %}

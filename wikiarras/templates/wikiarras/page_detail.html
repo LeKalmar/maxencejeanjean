@@ -1,0 +1,38 @@
+{% extends 'wikiarras/base_wiki.html' %}
+
+{% block content%}
+    {% if user.is_authenticated %}
+        <a href="{% url 'wikiarras:page_edit' page.id %}">Modifier cette page</a>
+    {% endif %}
+        <a href="{% url 'wikiarras:page_history' page.id %}" class="btn btn-secondary">Voir l'historique</a>
+    {% if infobox %}
+        <p><strong>Titre :</strong> {{ infobox.title }}</p>
+        <p><strong>Description :</strong> {{ infobox.description }}</p>
+    {% if infobox.date_of_birth %}
+        <p><strong>Date de naissance :</strong> {{ infobox.date_of_birth }}</p>
+    {% endif %}
+    {% if infobox.date_of_death %}
+        <p><strong>Date de décès :</strong> {{ infobox.date_of_death }}</p>
+    {% endif %}
+    {% else  %}
+    {% endif %}
+        <!-- Ajoutez d'autres champs ici selon le type d'infobox -->
+    {% if user.is_authenticated and not infobox  %}
+    <div class="bandeau-warning">
+        <p>⚠️ Aucune infobox n'est associée à cette page.</p>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="bandeau-warning-infobox-bouton">
+                Créer une infobox
+            </button>
+        </form>
+    </div>
+    {% endif %}
+    <h1 class="article-titre">{{ page.title }}</h1>
+    <div class="article-content">{{ page.formatted_markdown|safe }}</div>
+    <div class="article-metadata">
+        <p class="article-metadata-text">Créé par {{ page.created_by.username }} le {{ page.created_at|date:"d F Y à H:i" }}</p>
+        <p class="article-metadata-text">Dernière modification par {{ page.last_modified_by.username }} le {{ page.updated_at|date:"d F Y à H:i" }}</p>
+    </div>
+{% endblock %}

@@ -1,0 +1,65 @@
+/* Police d'écriture*/
+h1 {
+    border-bottom: solid 3px;
+}
+
+h3 {
+    border-bottom: dashed 1px;
+    text-indent: 0%;
+}
+
+/* Bandeau */
+.bandeau-warning {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    background-color: #d4d098;
+    border: 2px solid;
+}
+/* ARTICLE PRINCIPAL */
+.article-main {
+
+}
+.article-content {
+    flex: 1;
+}
+.article-metadata {
+    border-top: solid 2px #3F373C;
+}
+.article-metadata-text {
+    text-indent: 0px;
+    font-size: 11px;
+}
+
+/* Edition d'article*/
+
+.article-form {
+    border: solid 5px #3F373C;
+    border-radius: 5px;
+}
+.article-title-container {
+    display: flex;
+    background-color: #3F373C;
+    padding-bottom: 10px;
+    padding-top: 7px;
+    padding-left: 2px;
+    padding-right: 2px;
+}
+.article-title-input {
+    border: none;
+    border-radius: 2px;
+    margin: 0;
+    background-color: #D1BE9D;
+    height: 30px;
+    font-size: 26px;
+    font-weight: bold;
+    flex: 1;
+}
+.article-submit {
+    background-color: #3F373C;
+    color: #D1BE9D;
+}
+::placeholder {
+    color: #3F373C; /* Couleur du texte du placeholder */
+    opacity: 1; /* Assure que le texte est complètement opaque */
+}

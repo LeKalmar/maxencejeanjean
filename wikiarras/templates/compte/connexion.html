@@ -1,0 +1,10 @@
+{% extends 'wikiarras/base_wiki.html' %}
+{% block content %}
+    <h1>Connexion</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Se connecter</button>
+    </form>
+    <p>Pas encore de compte ? <a href="{% url 'wikiarras:inscription' %}">S'inscrire</a></p>
+{% endblock %}

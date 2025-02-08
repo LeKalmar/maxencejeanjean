@@ -1,16 +1,48 @@
+#légende-ligne {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #635e62;
+    min-height: 2.5vw;
+    padding-left: 0.5vw;
+    padding-right: 0.5vw;
+    margin-left: 0.5vw;
+    margin-right: 0.5vw;
+    margin-top: 3px;
+    margin-bottom: 3px;
+}
+.mapLegend-title {
+    background-color: #3F373C;
+    font-family: "Quintessential", serif;
+    font-weight: bold;
+    font-size: 28px;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    color:#D8CBB4 ;
+    padding: 1vw;	
+}
+
 /* Écran ordi */
 @media only screen and (min-width:1000px) {
     #experience-telephone {
         display: none;
     }
     #titre-section-legende {
+        background-color: #D1BE9D;
+        font-family: 'Trebuchet MS', sans-serif;
+        font-weight: bold;
         font-size : 22px;
-        border-bottom: 2px solid #000000;
-        border-bottom: 2px solid #000000;
+        color: #3F373C;
+        border: 2px solid #3F373C;
+        border-radius: 10px;
+        margin: 0px;
+        padding-top: 10px;
         padding-left: 0.5vw;
         padding-bottom: 0.5vw;
     }
     .légende-données {
+        max-width: 100%;
+        font-family: 'Trebuchet MS', sans-serif;
+        color: #3F373C;
         font-size: 17px;
         text-indent: 0.5vw;
     }
@@ -19,7 +51,7 @@
         height: 20%;
     }
     #titre-gauche {
-        background: #e8e9d1;
+        background: #D8CBB4;
         display: block;
         padding: 50px;
         margin: 0px;
@@ -74,13 +106,19 @@
         border: solid 5px;
         transition: height 0.3s, width 0.3s;
     }
+    .description-projet {
+		padding-left: 20vw;
+		padding-right: 20vw;
+		line-height: 1.3;	
+	}
 /* CARTE */
     #cadre-map {
+        border: solid 5px #3F373C;
         max-width: 85vw;
         margin: auto;
         margin-top: 50px;
         margin-bottom: 50px;
-        background: #e8e9d1;
+        background: #D8CBB4;
     }
     #carte-et-legende {
         display: flex;
@@ -89,34 +127,25 @@
     #legende-et-titre {
         display: block;
         max-width : 15vw;
+        border-right : 5px solid #3F373C;
     }
     #map {
-        border: 5px solid #000000;
         height: auto;
     }
     .mapLegend {
         max-width: auto;
         height: 60vh;
-        border-left: 5px solid;
-        border-bottom: 5px solid;
         overflow-y: scroll;
         white-space: nowrap;
         text-overflow: ellipsis;
-    }
-    .mapLegend-title {
-        border-bottom : 5px solid;
-        border-left : 5px solid;
-        border-top : 5px solid;
-        font: 2vw bold;
-        padding: 1vw;	
     }
     .mapLegend-scroll {
         padding-left : 1vw;
     }
     #titre-section-legende {
         font-size : 22px;
-        border-bottom: 2px solid #000000;
-        border-bottom: 2px solid #000000;
+        border-bottom: 2px solid #3F373C;
+        border-bottom: 2px solid #3F373C;
         padding-left: 0.5vw;
         padding-bottom: 0.5vw;
         text-indent: 0px;
@@ -126,22 +155,26 @@
     }
     #titre-carte {
         display: flex;
-        align-items: center;
         flex-direction: column;
+        align-items: center;
         padding-bottom: 1px;
-        background: #e8e9d1;
-        border-top: solid 5px;
-        border-left: solid 5px;
-        border-right: solid 5px;
+        background: #D8CBB4;
+        border-bottom : 5px solid #3F373C;
     }
     .gros-titre-carte {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        width: 65vw;
         font-size: 46px;
+        font-family: "Quintessential", serif;
+        color: #D8CBB4;
+        background-color: #3F373C;
+        border-radius: 10px;
+        font-weight: bolder;
         margin-top: 10px;
         margin-bottom: 5px;
         text-indent: 0px;;
-        display: flex;
-        flex-direction: row;
-        align-items: center;
     }
     .sous-titre-carte {
         font-size: 22px;
@@ -150,26 +183,26 @@
         padding-left: 15%;
         padding-right: 15%;
         text-indent: 0px;;
-        font-family: "Lato", "sans-serif";
+        font-family: "Trebuchet MS  ", "sans-serif";
     }
     #titre-tableau {
         font-size : 18px;
-        border-bottom: 2px solid #000000;
+        border-bottom: 2px solid #3F373C;
         padding-bottom: 5px;
     }
     #sous-titre-tableau {
         font-size : 16px;
-        border-bottom: 1px solid #000000;
+        border-bottom: 1px solid #3F373C;
         padding-bottom: 3px;		
     }
     #titre-tableau {
         font-size : 18px;
-        border-bottom: 2px solid #000000;
+        border-bottom: 2px solid #3F373C;
         padding-bottom: 5px;
     }
     #sous-titre-tableau {
         font-size : 16px;
-        border-bottom: 1px solid #000000;
+        border-bottom: 1px solid #3F373C;
         padding-bottom: 3px;		
     }
     .tableau-données {
@@ -183,8 +216,8 @@
 @media only screen and (max-width:1500px) {
     #description {
         flex-wrap: nowrap;
-        border-left: solid 10vw #cacbb8;
-        border-right: solid 10vw #cacbb8;
+        border-left: solid 10vw #D8CBB4;
+        border-right: solid 10vw #D8CBB4;
         line-height: 1.3;				
     }
 }	
@@ -193,8 +226,8 @@
 @media only screen and (max-width:1000px) {
     #description {
         flex-wrap: nowrap;
-        border-left: solid 0vw #cacbb8;
-        border-right: solid 0vw #cacbb8;
+        border-left: solid 0vw #D8CBB4;
+        border-right: solid 0vw #D8CBB4;
         line-height: 1.3;	
     }
     p {
@@ -202,8 +235,8 @@
     }
     #titre-section-legende {
         font-size : 16px;
-        border-bottom: 2px solid #000000;
-        border-bottom: 2px solid #000000;
+        border-bottom: 2px solid #3F373C;
+        border-bottom: 2px solid #3F373C;
         padding-left: 0.5vw;
         padding-bottom: 0.5vw;
         text-indent: 0px;
@@ -237,7 +270,7 @@
         font-size: 18px;
     }
     #titre-gauche {
-        background: #e8e9d1;
+        background: #D8CBB4;
         display: block;
         padding: 30px;
         margin: 0px;
@@ -286,6 +319,7 @@
     }
 /* CARTE */
     #cadre-map {
+        border-radius: 15px;
         max-width: 85vw;
         margin: auto;
         margin-top: 30px;
@@ -314,6 +348,7 @@
         text-overflow: ellipsis;
     }
     .mapLegend-title {
+        font-family: "Quintessential", serif;
         border-bottom : 5px solid;
         border-left : 5px solid;
         border-top : 5px solid;
@@ -403,4 +438,44 @@
     float: left;
     width: 50%;
 }
+}
+
+.titre-gauche {
+    background: #D8CBB4;
+    display: block;
+    padding: 50px;
+    margin: 0px;
+    border-top: solid 5px;
+    border-bottom: solid 5px;	
+    font-size: 50px;
+}
+#boite-texte {
+    max-width: 50%;
+}
+#gauche {
+    background: #d8cbb4d2;
+    padding-bottom: 5vh;
+    padding-top: 3vh;
+    padding-left: 5vw;
+    padding-right: 5vw;
+}
+#gauche-texte {
+    margin-left: 1vw;
+    margin-right: 1vw;
+}
+#droite-texte {
+    margin-right: 1vw;
+    margin-left: 1vw;
+}
+#droite {
+    background: #ffffffe7;
+    padding-bottom: 5vh;
+    padding-top: 5vh;
+    padding-left: 5vw;
+    padding-right: 5vw;
+    text-align: justify;
+    text-justify: inter-word;
+}
+#droite-texte-div {
+    max-width: 50%;
 }
