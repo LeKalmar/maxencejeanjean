@@ -1,5 +1,6 @@
 {% extends 'pages/base.html' %}
 {% load static %}
+
 {% block title %} Cadastre de J. Desailly {% endblock %}
 {% block style %}
     <meta charset="utf-8" />
@@ -47,20 +48,26 @@
 		<div id="carte-et-legende">
 			<div id="legende-et-titre">
 				<div class="mapLegend-title">Légende :</div>
-				{% for category in legend_data %}
-					<div>
-						<p id="titre-section-legende">{{ category.title }}</p>
-					</div>
-					{% for item in category.items %}
-						<div id="légende-ligne">
-							<img class="légende-logo" src="{% static 'pages/images/cartes/desailly-legende/' %}{{ item.icon }}"/>
-							<p class="légende-données">{{ item.label }}</p>
+				<div class="mapLegend">
+					{% if legend_data %}
+					{% for category in legend_data %}
+						<div>
+							<p id="titre-section-legende">{{ category.title }}</p>
 						</div>
+						{% for item in category.items %}
+							<div id="légende-ligne">
+								<img class="légende-logo" src="{% static 'pages/images/cartes/desailly-legende/' %}{{ item.icon }}"/>
+								<p class="légende-données">{{ item.label }}</p>
+							</div>
+						{% endfor %}
 					{% endfor %}
-				{% endfor %}
+					{% else %}
+						<p>Aucune donnée de légende disponible.</p>
+					{% endif %}
+				</div>
 			</div>
+			<div id="map" class="mapCanvas"></div>
 		</div>
-		<div id="map" class="mapCanvas"></div>
         <script src="{% static 'pages/js/qgis2web_expressions.js' %}"></script>
         <script src="{% static 'pages/js/leaflet.js' %}"></script>
         <script src="{% static 'pages/js/multi-style-layer.js' %}"></script>

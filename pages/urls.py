@@ -9,4 +9,5 @@ urlpatterns = [
     path('livres/', views.livres, name='livres'),
     path('apropos/', views.apropos, name='apropos'),
     path('projet/<int:projet_id>/', views.projet_detail, name='projet_detail'),
+    path('projet/desailly/', views.desailly_view, name='desailly_view'),  # Ajout de cette ligne
 ]

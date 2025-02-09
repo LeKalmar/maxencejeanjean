@@ -40,24 +40,108 @@ def desailly_view(request):
         {
             "title": "Clergé séculier",
             "items": [
-                {"icon": "cathedrale.png", "label": "Cathédrale"},
-                {"icon": "eglise-paroissiale.png", "label": "Église paroissiale"},
+                {"icon": "Cathédrale.png", "label": "Cathédrale"},
+                {"icon": "Eglise paroissiale.png", "label": "Église paroissiale"},
                 {"icon": "Eglise.png", "label": "Église"},
                 {"icon": "Paroisse.png", "label": "Paroisse"},
-                {"icon": "bat-religieux.png", "label": "Bâtiment religieux"},
-                {"icon": "cimetiere.png", "label": "Cimetière"},
+                {"icon": "Bâtiment religieux.png", "label": "Bâtiment religieux"},
+                {"icon": "Cimetière.png", "label": "Cimetière"},
             ]
         },
         {
             "title": "Clergé régulier",
             "items": [
-                {"icon": "abbaye-saint-vaast.png", "label": "Abbaye Saint-Vaast"},
+                {"icon": "abbaye Saint-Vaast.png", "label": "Abbaye Saint-Vaast"},
                 {"icon": "Abbaye.png", "label": "Abbaye"},
-                {"icon": "refuge-abbaye.png", "label": "Refuge d'Abbaye"},
+                {"icon": "Refuge d'Abbaye.png", "label": "Refuge d'Abbaye"},
                 {"icon": "Couvent.png", "label": "Couvent"},
                 {"icon": "Couvent-point.png", "label": "Bâtiment conventuel"},
             ]
         },
-        # Ajoutez d'autres catégories ici
+        {
+            "title": "Administration & justice",
+            "items": [
+                {"icon": "Bâtiment public.png", "label": "Bâtiment public"},
+                {"icon": "Etats d'Artois.png", "label": "Etats d'Artois"},
+                {"icon": "Justice.png", "label": "Justice"},
+                {"icon": "Hôtel de ville.png", "label": "Hôtel de ville"},
+                {"icon": "Prison.png", "label": "Prison"},
+                {"icon": "gibet.png", "label": "Gibet"},
+            ]
+        },
+        {
+            "title": "Militaire",
+            "items": [
+                {"icon": "Caserne.png", "label": "Caserne"},
+                {"icon": "Caserne-surface.png", "label": "Bâtiment de caserne"},
+                {"icon": "Château.png", "label": "Château"},
+                {"icon": "Magasin.png", "label": "Magasin"},
+                {"icon": "Porte.png", "label": "Porte"},
+                {"icon": "Fausse porte.png", "label": "Fausse porte"},
+                {"icon": "Rempart.png", "label": "Rempart"},
+                {"icon": "Dénivelé.png", "label": "Dénivelé"},
+                {"icon": "Terre-plein.png", "label": "Terre-plein"},
+            ]
+        },
+        {
+            "title": "Services",
+            "items": [
+                {"icon": "Hospice.png", "label": "Hospice"},
+                {"icon": "Jeu de paume.png", "label": "Jeu de paume"},
+                {"icon": "École.png", "label": "École"},
+                {"icon": "Pauvreté.png", "label": "Pauvreté"},
+                {"icon": "Pensionnat.png", "label": "Pensionnat"},
+                {"icon": "Port.png", "label": "Port"},
+            ]
+        },
+        {
+            "title": "Moulins",
+            "items": [
+                {"icon": "Moulin en bois.png", "label": "Moulin en bois"},
+                {"icon": "Moulin à tour.png", "label": "Moulin à tour"},
+                {"icon": "Moulin détruit.png", "label": "Moulin détruit"},
+                {"icon": "Moulin à eau.png", "label": "Moulin à eau"},
+            ]
+        },
+        {
+            "title": "Cadastre",
+            "items": [
+                {"icon": "Bâtiment.png", "label": "Bâtiment"},
+                {"icon": "Cour.png", "label": "Cour"},
+                {"icon": "Herbe.png", "label": "Friche"},
+                {"icon": "Jardin.png", "label": "Jardin"},
+                {"icon": "Pré.png", "label": "Prairie"},
+                {"icon": "Labour.png", "label": "Terres à labour"},
+                {"icon": "Labour & jardinage.png", "label": "Labour & jardinage"},
+                {"icon": "Marais.png", "label": "Marais"},
+                {"icon": "Disparu.png", "label": "Disparu"},
+                {"icon": "Masse.png", "label": "Masse"},
+            ]
+        },
+        {
+            "title": "Chaussée",
+            "items": [
+                {"icon": "Pont.png", "label": "Pont"},
+                {"icon": "Escalier.png", "label": "Escalier"},
+                {"icon": "Gué.png", "label": "Gué"},
+            ]
+        },
+        {
+            "title": "Eau",
+            "items": [
+                {"icon": "Eau en surface.png", "label": "Eau en surface"},
+                {"icon": "Eau souterraine.png", "label": "Eau souterraine"},
+            ]
+        },
+        {
+            "title": "Divers",
+            "items": [
+                {"icon": "Arbre de beaumetz.png", "label": "Arbre de Beaumetz"},
+                {"icon": "Arbre.png", "label": "Arbre"},
+                {"icon": "Calvaire.png", "label": "Calvaire"},
+                {"icon": "Puits.png", "label": "Puits"},
+                {"icon": "Source.png", "label": "Source"},
+            ]
+        },
     ]
     return render(request, 'pages/projets/desailly.html', {'legend_data': legend_data})

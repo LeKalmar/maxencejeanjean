@@ -20,7 +20,9 @@
     color:#D8CBB4 ;
     padding: 1vw;	
 }
-
+#map {
+    flex: 1;
+}
 /* Écran ordi */
 @media only screen and (min-width:1000px) {
     #experience-telephone {
@@ -128,9 +130,6 @@
         display: block;
         max-width : 15vw;
         border-right : 5px solid #3F373C;
-    }
-    #map {
-        height: auto;
     }
     .mapLegend {
         max-width: auto;
@@ -333,10 +332,6 @@
     #legende-et-titre {
         display: block;
         max-width : 25vw;
-    }
-    #map {
-        border: 5px solid #000000;
-        height: auto;
     }
     .mapLegend {
         max-width: auto;
