@@ -1,8 +1,7 @@
 {% extends 'wikiarras/base_wiki.html' %}  <!-- Remplacez 'base.html' par votre template de base -->
-
 {% block content %}
 <h1>Créer un nouvel article</h1>
-<form class="article-form" method="post" action="{% url 'wikiarras:create_page' %}" novalidate>
+<form class="article-form" method="post">
     {% csrf_token %}
     <div class="article-title-container">
         {{ form.title }}

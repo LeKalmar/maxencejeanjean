@@ -142,10 +142,11 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_ROOT = BASE_DIR / 'media'
-MARKDOWNX_MEDIA_PATH = 'uploads/markdownx/'
 
 TINYMCE_DEFAULT_CONFIG = {
-    'height': 300,  # Hauteur de l'éditeur
+    'content_css': '/static/wikiarras/css/custom_tinymce.css',
+    'min_height': 500,  # Hauteur de l'éditeur
+    'max_height': 1000,  # Hauteur maximale de 800 pixels
     'width': '100%',  # Largeur de l'éditeur
     'cleanup_on_startup': True,  # Nettoyer le contenu au démarrage
     'custom_undo_redo_levels': 20,  # Niveaux d'annulation/rétablissement
@@ -154,12 +155,13 @@ TINYMCE_DEFAULT_CONFIG = {
         textcolor save link image media preview codesample contextmenu
         table code lists fullscreen insertdatetime nonbreaking
         contextmenu directionality searchreplace wordcount visualblocks
-        visualchars code fullscreen autolink lists charmap print hr
-        anchor pagebreak
+        visualchars code autolink lists charmap hr
+        anchor pagebreak autoresize
     ''',
     'toolbar': '''
-        undo redo | formatselect | bold italic backcolor |
+        undo redo | formatselect | image | bold italic underline backcolor |
         alignleft aligncenter alignright alignjustify |
-        bullist numlist outdent indent | removeformat | help
+        bullist numlist outdent indent | link | removeformat | help
     ''',
+
 }

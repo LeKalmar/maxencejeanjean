@@ -1,0 +1,28 @@
+.mce-content-body {
+    background-color: #D1BE9D;  /* Fond blanc pour la zone éditable */
+    padding: 10px;              /* Espacement intérieur */
+    border-radius: 5px;         /* Bordures arrondies */
+    border: 1px solid #ccc;     /* Bordure légère */
+}
+
+/* Barre d'outils (bandeau supérieur) */
+.tox-toolbar {
+    background-color: #B9A37E;  /* Couleur de fond */
+    border-bottom: 1px solid #999 !important;  /* Bordure inférieure */
+}
+
+/* Barre d'état (bandeau inférieur) */
+.tox-statusbar {
+    background-color: #B9A37E !important;  /* Couleur de fond */
+    border-top: 1px solid #999 !important;  /* Bordure supérieure */
+}
+
+/* Optionnel : Personnaliser les boutons de la barre d'outils */
+.tox-tbtn {
+    color: #B9A37E !important;  /* Couleur des icônes */
+}
+
+/* Optionnel : Personnaliser le texte de la barre d'état */
+.tox-statusbar__path-item, .tox-statusbar__wordcount {
+    color: #B9A37E !important;  /* Couleur du texte */
+}

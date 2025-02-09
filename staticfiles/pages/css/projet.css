@@ -1,0 +1,121 @@
+.bandeau-projet {
+    padding-left: 5vw;
+    padding-right: 5vw;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    flex: 1;
+    border-bottom: solid 3px;
+    background: #d8cbb491;
+}
+
+.bandeau-projet-image {
+    width: 10vw;
+    object-fit: contain;
+    border: solid 2px;
+}
+
+.boite-bandeau-projet {
+    display: flex;
+    background-color: #D8CBB4;
+    border: solid 5px #3F373C;
+    border-radius: 15px;
+}
+
+.boite-bandeau-projet-texte {
+    width: 100%;
+}
+
+.projet-redirection {
+    text-align: right;
+    padding-right : 15px;
+    padding: 5px;
+    border-radius: 2px;
+}
+
+.boite-bandeau-projet-image {
+    display: flex;
+    align-content: center;
+    align-items: center;
+}
+
+.bandeau-projet-titre {
+    font-family: "Quintessential", serif;
+    font-weight: 500;
+    font-style: normal;    
+    background-color: #3F373C;
+    border-radius: 5px;
+    font-size: 15px;
+    display: flex;
+}
+
+.bandeau-projet-titre-type {
+    background-color: #D8CBB4;
+    color: #3F373C;
+    border-radius: 5px;
+    margin: 15px;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+} 
+.bandeau-projet-titre-titre {
+    color: #D8CBB4;
+    margin-right: 15px;
+}
+
+.bandeau-projet-description {
+    padding: 15px;
+}
+
+.bandeau-projet-image {
+    background-color: #3F373C;
+    padding: 15px;
+}
+
+#base-top-bandeau {
+    display: flex;
+    align-items: center;
+    border-bottom: solid 5px;
+    background-color: #D8CBB4; 
+    height: 80px;
+}
+
+.base-top-logo {
+    width: 75px;
+    height: 100%;
+    border-right: 5px;
+}
+.base-top-boutons {
+    display: flex;
+    gap: 20px;
+    background-color: #3F373C;
+    margin-left: 20px;
+    border-radius: 5px;
+    font-family: 'Trebuchet MS';
+} 
+.base-top-boutons:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    right: -10px;  /* Déplace la ligne à mi-chemin du gap */
+    top: 50%;
+    transform: translateY(-50%);  /* Centre verticalement */
+    width: 5px;  /* Épaisseur de la ligne */
+    height: 60%;  /* Hauteur de la ligne */
+    background-color: #D8CBB4;  /* Couleur de la ligne */
+}
+.base-top-boutons a {
+    color: #D8CBB4;
+}
+.base-top-boutons a:visited {
+    color: #D8CBB4;
+}
+.base-top-boutons a:hover {
+    color: #D8CBB4;
+}
+.base-top-bouton-individuel {
+    width: 120px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    font-size: 20px;
+
+}

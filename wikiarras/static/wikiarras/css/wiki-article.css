@@ -20,9 +20,6 @@ h3 {
 .article-main {
 
 }
-.article-content {
-    flex: 1;
-}
 .article-metadata {
     border-top: solid 2px #3F373C;
 }
@@ -59,7 +56,20 @@ h3 {
     background-color: #3F373C;
     color: #D1BE9D;
 }
+
+/* AUTRES */
 ::placeholder {
     color: #3F373C; /* Couleur du texte du placeholder */
     opacity: 1; /* Assure que le texte est complètement opaque */
+}
+/* EDITEUR D'ARTICLE */
+.tox-tinymce {
+    border: none !important;
+    border-radius: 0 !important;
+}
+.tox-statusbar__branding {
+    display: none !important;
+}
+.tox-promotion-link {
+display: none !important;
 }

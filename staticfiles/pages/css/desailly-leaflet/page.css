@@ -1,0 +1,293 @@
+  	body {
+       margin: 0;
+       padding: 0;
+	   background: url("../images/background.png");
+    }
+    html, body {  
+		width: 100%;
+		height: 100%; 
+    }
+	p {
+		font-size: 20px;
+		font-family: "Open Sans", sans-serif;
+		margin-block-start: 0.5em;
+		margin-block-end: 0.5em;
+	}
+	.small {
+		font-size: 16px;
+	}
+	p > a:link {
+		color: #a15528;
+		text-decoration: none;
+	}
+	p > a:visited {
+		color: #cd1c1c;
+		text-decoration: none;
+	}
+	a:link {
+		color: #3d3e32;
+		text-decoration: none;
+	}
+
+	a:visited {
+		color: #3d3e32;
+		text-decoration: none;
+	}
+	
+	a:hover {
+		color: #000000;
+		font-weight: bold;
+	}
+
+	a:active {
+		color: blue;
+		text-decoration: none;
+	}
+	#nom {
+		background: #e8e9d1;
+		display: flex;
+		flex-wrap: nowrap;
+		justify-content: center;
+	}
+	.visage {
+		margin-right: auto;
+		width: 12.45%;
+		height: 12.45%;
+	}
+	.Maxencejeanjean {
+		margin-left: 10%;
+		margin-right: auto;
+		margin-top: auto;
+		margin-bottom: auto;
+		width: 30%;
+		height: 30%;
+	}
+	.MJlogo {
+		display: block;
+		margin-left: auto;
+		width: 8%;
+		height: 8%;
+		border-left: solid #292624 7px;
+	}
+	
+	#bienvenue {
+		border-top: solid #292624 7px;
+		display: flex;
+		justify-content: center;
+	}
+	.boutons {
+		display: flex;
+		flex-wrap: nowrap;
+		justify-content: center;
+		flex: auto;
+		border-bottom: solid #292624 3px;
+		border-right: solid #292624 3px;
+		border-left: solid #292624 3px;
+		border-bottom-right-radius: 15px;
+		border-bottom-left-radius: 15px;
+		text-align: center;
+		transition:  height 0.3s, padding 0.3s;
+	}
+	.boutons.secondaire:hover {
+	    height: 75px;
+		padding-top: 25px;
+	}
+	.primaire {
+		background: #e8e9d1;
+		padding-top: 25px;
+		height: 75px;
+		margin: 0px;
+		font-size: 30px;
+		font-weight: 900;
+		font-family: "Open Sans", sans-serif;
+	}
+	.secondaire {
+		background: #e8e9d1;
+		padding-top: 5px;
+		height: 50px;
+		vertical-align: middle;
+		font-size: 30px;
+		font-weight: 500;
+		font-family: "Open Sans", sans-serif;
+	}
+	#about {
+		background: #000000;
+		padding: 100px;
+		display: flex;
+		justify-content: center;
+		color: white;
+		margin-top: auto;
+	}
+	#description {
+		display: flex
+		flex-wrap: nowrap;
+		border-left: solid 20vw #cacbb8;
+		border-right: solid 20vw #cacbb8;
+		line-height: 1.3;	
+	}
+	.tableau {
+		width: 100%;
+	}
+	.td {
+		width: 45%;
+	}
+
+/* CARTE */
+	#cadre-map {
+		width: 85vw;
+		margin: auto;
+		margin-top: 50px;
+		margin-bottom: 50px;
+		background: #e8e9d1;
+	}
+	#carte-et-legende {
+		display: flex;
+		flex-direction: row;		
+	}
+	#legende-ligne {
+		display: flex;
+		flex-direction: row;
+	}
+	#map {
+		border: 5px solid #000000;
+	}
+	.mapLegend {
+		padding-left: 1vw;
+		padding-right: 1vw;
+		width: auto;
+		height: 70vh;
+		border-left: 5px solid;
+		border-bottom: 5px solid;
+		overflow-y: scroll;
+		overflow-x: hidden;
+	}
+	.mapLegend-title {
+		border-bottom : 5px solid;
+		border-left : 5px solid;
+		border-top : 5px solid;
+		font: 36px bold;
+		padding: 1vw;		
+	}
+	.mapLegend-scroll {
+		padding-left : 1vw;
+	}
+	#titre-section-legende {
+		font-size : 22px;
+		border-bottom: 2px solid #000000;
+	}
+	.mapCanvas { 
+		width: 74vw;
+	}
+	#titre-carte {
+		padding-bottom: 1px;
+		background: #e8e9d1;
+		border-top: solid 5px;
+		border-left: solid 5px;
+		border-right: solid 5px;
+	}
+	.gros-titre-carte {
+		font: 48px bold;
+		margin-top: 10px;
+		margin-bottom: 5px;
+	}
+	.sous-titre-carte {
+		font: 22px bold;
+		margin-top: 5px;
+		margin-bottom: 10px;
+	}
+	
+/* AUTRES */
+	.td-image{
+		line-height: 2;
+	}
+	.titre-gauche {
+		background: #e8e9d1;
+		display: block;
+		padding:50px;
+		margin: 0px;
+		border-top: solid 5px;
+		border-bottom: solid 5px;	
+		font-size: 50px
+	}
+	.td-span-gauche {
+		padding-right: 5vw;
+	}
+	.gauche-image {
+		width: 73%;
+		height: 73%;
+		border: solid 5px;
+	}
+	.gauche {
+		background: #e8e9d1;
+		padding-bottom: 5vh;
+		padding-top: 5vh;
+		padding-left: 5vw;
+		padding-right: 0vw;
+		text-align: justify;
+		text-justify: inter-word;
+	}
+	.titre-droite {
+		background: #ffffff;
+		display: block;
+		padding:50px;
+		margin: 0px;
+		border-top: solid 5px;
+		border-bottom: solid 5px;	
+		font-size: 3vw
+	}
+	.td-span-droite {
+		padding-left: 5vw;
+	}
+	.droite-image {
+		justify-content: center;
+		border: solid 5px;
+		background: #ffffff;
+	}
+	.droite {
+		background: #ffffff;
+		padding-bottom: 5vh;
+		padding-top: 5vh;
+		padding-left: 0vw;
+		padding-right: 5vw;
+		text-align: justify;
+		text-justify: inter-word;
+	}
+	#Glossaire {
+		background: #ffffff;		
+	}
+	.popup-img {
+		width : 75%;
+		height : 75%;
+		border : 5px solid #000000;
+		margin : 15px 0px 15px 0px;
+	}
+	#titre-tableau {
+		font-size : 18px;
+		border-bottom: 2px solid #000000;
+		padding-bottom: 5px;
+	}
+	#sous-titre-tableau {
+		font-size : 16px;
+		border-bottom: 1px solid #000000;
+		padding-bottom: 3px;		
+	}
+	.tableau-données {
+		border-bottom: 1px solid #ddd;
+		padding-bottom: 2px;
+		min-width : 175px;
+	}
+	.légende-données {
+		border-bottom: 1px solid #ddd;
+		padding-bottom: 2px;
+		padding-left: 10px;
+	}
+	.légende-données-logo {
+		border-bottom: 1px solid #ddd;
+		padding-bottom: 2px;
+		padding-top: 2px;
+        vertical-align: text-top;
+		max-width: 35px;
+		display: flex;
+		justify-content: center;
+		min-height: 30px;
+	}

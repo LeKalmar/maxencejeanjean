@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>{% block title%}{%endblock%}</title>
+    <title>{% block title %}{% endblock %}</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="{% static 'wikiarras/images/logo/logo-wikiarras.jpg' %}" type="image/icon type">
@@ -15,11 +15,9 @@
     <link rel="stylesheet" href="{% static 'pages/css/projet.css' %}">
     <link rel="stylesheet" href="{% static 'wikiarras/css/wiki-accueil.css' %}">
     <link rel="stylesheet" href="{% static 'wikiarras/css/wiki-article.css' %}">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/easymde/dist/easymde.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/easymde/dist/easymde.min.js"></script>
-    {{ form.media }}
-    {% block style%}{%endblock%}
-    {% block extrahead %}{% endblock %}
+    {{ form.media }}  <!-- Inclure les fichiers statiques de TinyMCE -->
+</head>
+<body>
     <div id="base-top-bandeau">
         <div class="retour-site-bouton" align="center">
             <img class="retour-site-logo" src="{% static 'pages/images/logo/MJ-logo.png' %}" alt="Logo"/>
@@ -49,18 +47,6 @@
             {% endif %}
         </nav>
     </div>
-</head>
-<body>
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            var easyMDE = new EasyMDE({ element: document.getElementById("id_content") });
-    
-            document.querySelector("form").addEventListener("submit", function() {
-                document.getElementById("id_content").value = easyMDE.value(); // Copie le contenu dans le textarea avant envoi
-            });
-        });
-    </script>
-
     <div class="content wiki-accueil">
         <div class="page-bandeau gauche">
             <img class="page-bandeau-logo" src="{% static 'wikiarras/images/logo/logo-wikiarras.jpg' %}"/>
@@ -80,13 +66,13 @@
         </div>
         <div class="page-bandeau droite"></div>
     </div>
-	<div class="about">
+    <div class="about">
         <div class="footer-about-me">
             <div class="footer-row">
                 <img class="footer-logo" src="{% static 'pages/svg/icons/user-svgrepo-com.svg' %}"/>
                 <a href="{% url 'apropos' %}" target="_blank">A propos de moi</a>
             </div>
-			<div class="footer-row">
+            <div class="footer-row">
                 <img class="footer-logo" src="{% static 'pages/svg/icons/earth-svgrepo-com.svg' %}"/>
                 <a href="https://fr.wikipedia.org/wiki/Utilisateur:Maxence_Jeanjean" target="_blank">Mon wikipédia</a>
             </div>
@@ -104,6 +90,7 @@
                 <img class="footer-logo" src="{% static 'pages/svg/icons/facebook-svgrepo-com.svg' %}"/>
                 <a href="https://www.facebook.com/MaxenceJeanjean2/" target="_blank">Mon Facebook</a>
             </div>
-	</div>
+        </div>
+    </div>
 </body>
 </html>
